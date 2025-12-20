@@ -5,13 +5,13 @@ import { Calendar, Clock, User, Mail, Phone, FileText, CheckCircle } from 'lucid
 export default function Booking() {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
+    service: '',
     date: '',
     time: '',
-    service: '',
     message: '',
   });
+  
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -24,22 +24,34 @@ export default function Booking() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        date: '',
-        time: '',
-        service: '',
-        message: '',
-      });
-    }, 5000);
-  };
+  const WHATSAPP_NUMBER = "917498881947"; 
+// 👆 replace with CLIENT’S official WhatsApp number (country code required)
+
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const message = `
+📅 *New Appointment Request*
+
+👤 Name: ${formData.name}
+📞 Phone: ${formData.phone}
+🩺 Service: ${formData.service}
+📆 Date: ${formData.date}
+⏰ Time: ${formData.time}
+
+📝 Notes:
+${formData.message || "No additional notes"}
+  `;
+
+  const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    message
+  )}`;
+
+  window.open(whatsappURL, "_blank");
+
+  setIsSubmitted(true);
+};
+
 
   const services = [
     'General Health Checkup',
@@ -210,41 +222,28 @@ export default function Booking() {
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Email Address
-                      </label>
-                      <div className="relative">
-                        <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#A7D3F3] focus:ring-2 focus:ring-[#A7D3F3]/20 outline-none transition-all"
-                          placeholder="john@example.com"
-                        />
-                      </div>
-                    </div>
+                    
+                    
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Phone Number
-                      </label>
-                      <div className="relative">
-                        <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          required
-                          className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#A7D3F3] focus:ring-2 focus:ring-[#A7D3F3]/20 outline-none transition-all"
-                          placeholder="+1 (555) 000-0000"
-                        />
-                      </div>
-                    </div>
+  <label className="block text-sm font-semibold text-gray-700 mb-2">
+    Phone Number
+  </label>
+  <div className="relative">
+    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+    <input
+      type="tel"
+      name="phone"
+      value={formData.phone}
+      onChange={handleChange}
+      required
+      className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200
+                 focus:border-[#A7D3F3] focus:ring-2 focus:ring-[#A7D3F3]/20
+                 outline-none transition-all"
+      placeholder="+91 98765 43210"
+    />
+  </div>
+</div>
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -351,19 +350,18 @@ export default function Booking() {
                     <CheckCircle className="w-12 h-12 text-white" />
                   </motion.div>
                   <h3 className="text-3xl font-bold text-gray-800 mb-4">
-                    Appointment Confirmed!
-                  </h3>
-                  <p className="text-gray-600 text-lg mb-8">
-                    Thank you for choosing Alexis Hospital. We've received your
-                    appointment request and will send you a confirmation email shortly.
-                  </p>
-                  <p className="text-gray-500 text-sm">
-                    You'll receive an email at{' '}
-                    <span className="font-semibold text-[#A7D3F3]">
-                      {formData.email}
-                    </span>{' '}
-                    with your appointment details.
-                  </p>
+  Appointment Sent Successfully!
+</h3>
+
+<p className="text-gray-600 text-lg mb-6">
+  Your appointment request has been sent directly to our WhatsApp.
+  Our team will contact you shortly to confirm.
+</p>
+
+<p className="text-gray-500 text-sm">
+  Please keep WhatsApp available on your phone.
+</p>
+
                 </motion.div>
               )}
             </motion.div>

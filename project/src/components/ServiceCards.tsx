@@ -27,7 +27,7 @@ export default function ServiceCards({ category }: Props) {
     const fetchServices = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/v1/serviceDetails/${category.toLowerCase()}`
+          `https://alexis-hospital.onrender.com/api/v1/serviceDetails/${category.toLowerCase()}`
         );
         setServices(res.data.services || []);
       } catch (err) {

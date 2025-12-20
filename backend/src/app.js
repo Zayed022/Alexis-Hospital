@@ -5,7 +5,8 @@ const app = express()
 
 app.use(cors({
     origin: [
-        "http://localhost:5173"
+        "http://localhost:5173",
+        "https://alexis-hospital.vercel.app"
     ],
     credentials: true
 }))
@@ -24,5 +25,8 @@ app.use("/api/v1/service",service);
 
 import serviceDetails from './routes/serviceDetails.routes.js'
 app.use("/api/v1/serviceDetails",serviceDetails);
+
+import ctaImage from './routes/ctaImage.routes.js'
+app.use("/api/v1/ctaImage",ctaImage);
 
 export {app}

@@ -13,6 +13,7 @@ import {
 import HomeBanner from "../components/HomeBanner"
 import Service from '../components/Service';
 import BeforeAfterCase from '../components/BeforeAfterCase';
+import CtaImage from '../components/CtaImage';
 
 export default function Home() {
   const services = [
@@ -411,41 +412,8 @@ export default function Home() {
         </div>
       </motion.section>
 
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#A7D3F3] to-[#F7C6D3]"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-          >
-            Ready to Experience Premium Care?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-white/90 text-xl mb-10"
-          >
-            Schedule your appointment today and discover the Alexis Hospital difference
-          </motion.p>
-          <Link to="/booking">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-[#A7D3F3] px-10 py-4 rounded-full font-bold text-lg shadow-2xl"
-            >
-              Book Your Appointment
-            </motion.button>
-          </Link>
-        </div>
-      </motion.section>
+      <CtaImage/>
+      <br />
     </div>
   );
 }

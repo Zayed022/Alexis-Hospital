@@ -13,10 +13,11 @@ import {
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
+    phone: '',
     subject: '',
     message: '',
   });
+  
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -31,12 +32,28 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 5000);
+  
+    const clientWhatsAppNumber = "917498881947"; 
+    // 👆 Use country code, no +, no spaces
+  
+    const whatsappMessage = `
+  New Inquiry from Website:
+  
+  Name: ${formData.name}
+  Phone: ${formData.phone}
+  Subject: ${formData.subject}
+  
+  Message:
+  ${formData.message}
+    `.trim();
+  
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+  
+    const whatsappURL = `https://wa.me/${clientWhatsAppNumber}?text=${encodedMessage}`;
+  
+    window.open(whatsappURL, "_blank");
   };
+  
 
   const contactInfo = [
     {
@@ -197,19 +214,22 @@ export default function Contact() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#A7D3F3] focus:ring-2 focus:ring-[#A7D3F3]/20 outline-none transition-all"
-                        placeholder="john@example.com"
-                      />
-                    </div>
+  <label className="block text-sm font-semibold text-gray-700 mb-2">
+    Phone Number
+  </label>
+  <input
+    type="tel"
+    name="phone"
+    value={formData.phone}
+    onChange={handleChange}
+    required
+    className="w-full px-4 py-3 rounded-xl border border-gray-200
+               focus:border-[#A7D3F3] focus:ring-2 focus:ring-[#A7D3F3]/20
+               outline-none transition-all"
+    placeholder="+91 98765 43210"
+  />
+</div>
+
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -320,24 +340,46 @@ export default function Contact() {
               </div>
 
               <div className="bg-gradient-to-br from-[#F5EAD7]/50 to-white rounded-3xl p-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                  Hospital Location
-                </h3>
-                <div className="bg-gradient-to-br from-[#A7D3F3]/20 to-[#F7C6D3]/20 rounded-2xl aspect-video flex items-center justify-center mb-6">
-                  <MapPin className="w-16 h-16 text-[#A7D3F3]" />
-                </div>
-                <p className="text-gray-600 mb-4">
-                  Located in the heart of the Medical District, easily accessible by
-                  car and public transportation.
-                </p>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-[#A7D3F3] to-[#F7C6D3] text-white px-8 py-3 rounded-full font-semibold shadow-lg"
-                >
-                  Get Directions
-                </motion.button>
-              </div>
+  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+    Hospital Location
+  </h3>
+
+  {/* GOOGLE MAP EMBED */}
+  <div className="rounded-2xl overflow-hidden aspect-video mb-6 shadow-lg">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.3388662818693!2d73.06689187467084!3d19.311096444551016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bdb6c23e2777%3A0x179da9d8a75fcee6!2sDR.GANESH%20AHIRE%20MBBS%20MD%20MEDICINE%20%2C%20DR.AHMED%20KHAN%20MANAGING%20DIRECTOR%20-%20ALEXIS%20HOSPITAL%20%26%20CRITICAL%20CARE%20CENTRE!5e0!3m2!1sen!2sin!4v1766237546240!5m2!1sen!2sin"
+      className="w-full h-full"
+      style={{ border: 0 }}
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      title="Alexis Hospital Location"
+    />
+  </div>
+
+  <p className="text-gray-600 mb-4">
+    Located in the heart of the Medical District, easily accessible by
+    car and public transportation.
+  </p>
+
+  {/* DIRECTIONS BUTTON */}
+  <motion.a
+    href="https://www.google.com/maps/dir/?api=1&destination=Alexis+Hospital+%26+Critical+Care+Centre"
+    target="_blank"
+    rel="noopener noreferrer"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="
+      inline-flex items-center justify-center
+      bg-gradient-to-r from-[#A7D3F3] to-[#F7C6D3]
+      text-white px-8 py-3 rounded-full
+      font-semibold shadow-lg
+    "
+  >
+    Get Directions
+  </motion.a>
+</div>
+
+
             </motion.div>
           </div>
         </div>

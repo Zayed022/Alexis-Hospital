@@ -92,14 +92,16 @@ export default function BeforeAfterCase() {
             "
           >
             <img
-              src={img.src}
-              alt={img.label}
-              className="
-                w-full
-                h-[22rem]
-                object-cover
-              "
-            />
+  src={img.src}
+  alt={img.label}
+  className="
+    w-full
+    h-[22rem]
+    object-contain
+    bg-white
+  "
+/>
+
             <div className="py-4 text-center text-sm font-semibold tracking-wider text-gray-700">
               {img.label}
             </div>
