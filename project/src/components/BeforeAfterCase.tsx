@@ -47,16 +47,15 @@ export default function BeforeAfterCase() {
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="
-       before-after-card
-        bg-white rounded-[32px] shadow-2xl
-        max-w-[1100px]
-        mx-auto
-        min-h-[520px]
-        p-14
-        grid grid-cols-1 lg:grid-cols-2 gap-16
-        items-center
-      "
-    >
+  bg-white rounded-[32px] shadow-2xl
+  max-w-[1100px]
+  mx-auto
+  p-6 sm:p-10 lg:p-14
+  grid grid-cols-1 lg:grid-cols-2
+  gap-10 lg:gap-16
+  items-center
+"
+>
       {/* LEFT */}
       <div>
         <span
@@ -91,16 +90,18 @@ export default function BeforeAfterCase() {
               shadow-xl
             "
           >
-            <img
-  src={img.src}
-  alt={img.label}
-  className="
-    w-full
-    h-[22rem]
-    object-contain
-    bg-white
-  "
-/>
+           <div className="w-full aspect-square bg-white flex items-center justify-center">
+  <img
+    src={img.src}
+    alt={img.label}
+    className="
+      w-full
+      h-full
+      object-cover
+    "
+  />
+</div>
+
 
             <div className="py-4 text-center text-sm font-semibold tracking-wider text-gray-700">
               {img.label}
