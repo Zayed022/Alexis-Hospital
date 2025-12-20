@@ -24,7 +24,7 @@ export default function BeforeAfterCase() {
     const fetchCases = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8000/api/v1/beforeAfterCase/"
+          "https://alexis-hospital.onrender.com/api/v1/beforeAfterCase/"
         );
         setCases(res.data.cases || []);
       } catch (error) {

@@ -9,7 +9,7 @@ export default function CtaImage() {
     const fetchImage = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8000/api/v1/ctaImage/"
+          "https://alexis-hospital.onrender.com/api/v1/ctaImage/"
         );
         setImage(res.data.image?.image || null);
       } catch (err) {

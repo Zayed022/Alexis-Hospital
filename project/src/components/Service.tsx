@@ -25,7 +25,7 @@ export default function Service() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/service/");
+        const res = await axios.get("https://alexis-hospital.onrender.com/api/v1/service/");
         setServices(res.data.services || []);
       } catch (error) {
         console.error("Failed to fetch services", error);

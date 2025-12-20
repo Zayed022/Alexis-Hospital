@@ -25,7 +25,7 @@ export default function ServiceDetailsPage() {
     const fetchService = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/v1/serviceDetails/${slug}`
+          `https://alexis-hospital.onrender.com/api/v1/serviceDetails/${slug}`
         );
         setService(res.data.service);
       } catch (error) {

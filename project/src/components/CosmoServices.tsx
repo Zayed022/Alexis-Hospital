@@ -21,7 +21,7 @@ export default function CosmoService() {
     const fetchServices = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8000/api/v1/service/cosmetology"
+          "https://alexis-hospital.onrender.com/api/v1/service/cosmetology"
         );
         setServices(res.data.services || []);
       } catch (error) {

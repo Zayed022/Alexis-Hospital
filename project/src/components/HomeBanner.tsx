@@ -23,7 +23,7 @@ export default function HomeBanner() {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/homeBanner/");
+        const res = await axios.get("https://alexis-hospital.onrender.com/api/v1/homeBanner/");
         setBanners(res.data.banners || []);
       } catch (error) {
         console.error("Failed to fetch banners", error);
