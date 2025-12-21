@@ -200,7 +200,16 @@ export default function Home() {
       </section>
 
       <HomeBanner/>
-      <Service/>
+
+      <motion.div variants={fadeInUp} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+              Our Happy Clients
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Have a look at our happy clients and their treatment results!
+            </p>
+          </motion.div>
+      
       <BeforeAfterCase/>
 
       <motion.section
@@ -219,6 +228,7 @@ export default function Home() {
               Comprehensive healthcare and beauty solutions tailored to your needs
             </p>
           </motion.div>
+          <Service/>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
@@ -247,6 +257,7 @@ export default function Home() {
         </div>
       </motion.section>
 
+{/*
       <motion.section
         initial="initial"
         whileInView="animate"
@@ -321,6 +332,7 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
+      */}
 
       <motion.section
         initial="initial"
