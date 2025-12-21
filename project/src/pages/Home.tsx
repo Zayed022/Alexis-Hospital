@@ -201,16 +201,17 @@ export default function Home() {
 
       <HomeBanner/>
 
-      <motion.div variants={fadeInUp} className="text-center mb-16">
+      <motion.div variants={fadeInUp} className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
               Our Happy Clients
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               Have a look at our happy clients and their treatment results!
             </p>
+            <BeforeAfterCase/>
           </motion.div>
       
-      <BeforeAfterCase/>
+      
 
       <motion.section
         initial="initial"
