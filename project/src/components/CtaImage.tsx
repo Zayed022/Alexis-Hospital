@@ -28,13 +28,28 @@ export default function CtaImage() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="w-full"
+      className="w-full overflow-hidden"
     >
-      <img
-        src={image}
-        alt="CTA"
-        className="w-full h-[620px] object-cover"
-      />
+      <div
+        className="
+          relative w-full
+          h-[220px]
+          sm:h-[320px]
+          md:h-[420px]
+          lg:h-[520px]
+          xl:h-[620px]
+        "
+      >
+        <img
+          src={image}
+          alt="CTA"
+          className="
+            absolute inset-0
+            w-full h-full
+            object-cover
+          "
+        />
+      </div>
     </motion.section>
   );
 }
