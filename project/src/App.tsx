@@ -19,7 +19,6 @@ function App() {
     <Router>
       <div className="min-h-screen bg-white">
         <TopInfoBar/>
-        <br />
         <Navbar />
         <AnimatePresence mode="wait">
           <Routes>
