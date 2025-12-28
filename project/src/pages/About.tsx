@@ -1,33 +1,12 @@
 import { motion } from 'framer-motion';
 import { Award, Users, Heart, Target, Eye, Lightbulb } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+import { doctors } from "../data/doctors"
+
 
 export default function About() {
-  const doctors = [
-    {
-      name: 'Dr. Sarah Anderson',
-      specialty: 'Chief Medical Officer',
-      experience: '25+ years',
-      description: 'Board-certified in Internal Medicine with expertise in preventive care',
-    },
-    {
-      name: 'Dr. Michael Ross',
-      specialty: 'Dermatology & Cosmetology',
-      experience: '18+ years',
-      description: 'Leading expert in aesthetic dermatology and laser treatments',
-    },
-    {
-      name: 'Dr. Emily Chen',
-      specialty: 'Cosmetic Surgery',
-      experience: '15+ years',
-      description: 'Specialized in minimally invasive aesthetic procedures',
-    },
-    {
-      name: 'Dr. James Martinez',
-      specialty: 'Emergency Medicine',
-      experience: '20+ years',
-      description: 'Expert in critical care and emergency medical services',
-    },
-  ];
+  
 
   const timeline = [
     { year: '2010', event: 'Alexis Hospital Founded', description: 'Started with 50 beds and basic medical services' },
@@ -234,34 +213,40 @@ export default function About() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {doctors.map((doctor, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ y: -10 }}
-                className="bg-gradient-to-br from-[#F5EAD7]/30 to-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-24 h-24 bg-gradient-to-br from-[#A7D3F3] to-[#F7C6D3] rounded-2xl flex items-center justify-center mx-auto mb-6"
-                >
-                  <Users className="w-12 h-12 text-white" />
-                </motion.div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">
-                  {doctor.name}
-                </h3>
-                <p className="text-[#A7D3F3] font-semibold text-center mb-2">
-                  {doctor.specialty}
-                </p>
-                <p className="text-sm text-gray-500 text-center mb-3">
-                  {doctor.experience}
-                </p>
-                <p className="text-gray-600 text-sm text-center leading-relaxed">
-                  {doctor.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+  {doctors.map((doctor) => (
+    <Link key={doctor.slug} to={`/doctors/${doctor.slug}`}>
+      <motion.div
+        variants={fadeInUp}
+        whileHover={{ y: -10 }}
+        className="cursor-pointer bg-gradient-to-br from-[#F5EAD7]/30 to-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all"
+      >
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          className="w-24 h-24 bg-gradient-to-br from-[#A7D3F3] to-[#F7C6D3] rounded-2xl flex items-center justify-center mx-auto mb-6"
+        >
+          <img
+            src={doctor.image}
+            alt={doctor.name}
+            className="w-20 h-20 object-cover rounded-xl"
+          />
+        </motion.div>
+
+        <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">
+          {doctor.name}
+        </h3>
+
+        <p className="text-[#0f5aa7] font-semibold text-center mb-2">
+          {doctor.title}
+        </p>
+
+        <p className="text-sm text-gray-500 text-center">
+          {doctor.experience}
+        </p>
+      </motion.div>
+    </Link>
+  ))}
+</div>
+
         </div>
       </motion.section>
 

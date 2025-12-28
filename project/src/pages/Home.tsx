@@ -14,6 +14,8 @@ import HomeBanner from "../components/HomeBanner"
 import Service from '../components/Service';
 import BeforeAfterCase from '../components/BeforeAfterCase';
 import CtaImage from '../components/CtaImage';
+import Stats from '../components/Stats';
+import VideoTestimonials from '../components/VideoTestimonials';
 
 export default function Home() {
   const services = [
@@ -377,6 +379,9 @@ export default function Home() {
         </div>
       </motion.section>
 
+      <Stats/>
+      <VideoTestimonials/>
+
       <motion.section
         initial="initial"
         whileInView="animate"
@@ -422,8 +427,40 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+          <Link to="/testimonials">
+  <button
+    className="
+      mt-8
+      inline-flex
+      items-center
+      justify-center
+      rounded-full
+      bg-gradient-to-r
+      from-[#A7D3F3]
+      to-[#F7C6D3]
+      px-8
+      py-3
+      text-sm
+      font-semibold
+      text-white
+      shadow-lg
+      transition
+      duration-300
+      hover:scale-105
+      hover:shadow-xl
+      focus:outline-none
+      focus:ring-2
+      focus:ring-[#A7D3F3]
+      focus:ring-offset-2
+    "
+  >
+    Read More Testimonials
+  </button>
+</Link>
+
         </div>
       </motion.section>
+
 
       <CtaImage/>
       <br />
