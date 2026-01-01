@@ -62,35 +62,35 @@ export default function ServiceDetailsPage() {
 
       {/* ================= MAIN CONTENT ================= */}
       <section className="py-24">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+
           {/* LEFT CONTENT */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Long Description */}
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
               Service Overview
             </h2>
+
             <p className="text-gray-600 leading-relaxed mb-10">
               {service.longDescription}
             </p>
 
-            {/* Checklist */}
             <h3 className="text-xl font-semibold text-gray-800 mb-4">
               What’s Included
             </h3>
+
             <ul className="space-y-3 mb-12">
               {service.checklist.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-[#F7C6D3]" />
+                <li key={idx} className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-[#ff7197] mt-0.5" />
                   <span className="text-gray-700">{item}</span>
                 </li>
               ))}
             </ul>
 
-            {/* Highlights */}
             {service.highlights.length > 0 && (
               <>
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">
@@ -98,8 +98,8 @@ export default function ServiceDetailsPage() {
                 </h3>
                 <ul className="space-y-3">
                   {service.highlights.map((highlight, idx) => (
-                    <li key={idx} className="flex items-center gap-3">
-                      <Star className="w-5 h-5 text-[#A7D3F3]" />
+                    <li key={idx} className="flex items-start gap-3">
+                      <Star className="w-5 h-5 text-[#0095ff] mt-0.5" />
                       <span className="text-gray-700 font-medium">
                         {highlight}
                       </span>
@@ -115,20 +115,34 @@ export default function ServiceDetailsPage() {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 gap-6"
+            className="lg:sticky lg:top-28 space-y-6"
           >
-            {service.images.map((img, idx) => (
-              <div
-                key={idx}
-                className="rounded-3xl overflow-hidden shadow-xl bg-white"
-              >
+            {/* FEATURE IMAGE */}
+            {service.images[0] && (
+              <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-50 p-4">
                 <img
-                  src={img}
-                  alt={`${service.title} ${idx + 1}`}
-                  className="w-full h-full object-cover"
+                  src={service.images[0]}
+                  alt={service.title}
+                  className="w-full h-[320px] object-contain"
                 />
               </div>
-            ))}
+            )}
+
+            {/* SUPPORTING IMAGES */}
+            <div className="grid grid-cols-2 gap-4">
+              {service.images.slice(1).map((img, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl overflow-hidden shadow-md bg-gray-50 p-3"
+                >
+                  <img
+                    src={img}
+                    alt={`${service.title} ${idx + 2}`}
+                    className="w-full h-40 object-contain"
+                  />
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -138,7 +152,7 @@ export default function ServiceDetailsPage() {
         <div className="max-w-4xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 gap-10 text-center">
           <div>
             <p className="text-gray-500 mb-1">Price Range</p>
-            <p className="text-2xl font-bold text-[#0095ff] ">
+            <p className="text-2xl font-bold text-[#0095ff]">
               {service.priceRange}
             </p>
           </div>

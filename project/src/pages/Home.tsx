@@ -248,8 +248,9 @@ export default function Home() {
 </section>
 
 
-
+      <VideoTestimonials/>
       <HomeBanner/>
+      
 
      <motion.section
   variants={fadeInUp}
@@ -272,6 +273,7 @@ export default function Home() {
     animate={{ scale: [1, 1.1, 1] }}
     transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
   />
+  
 
   {/* Content */}
   <div className="relative z-10 max-w-7xl mx-auto text-center">
@@ -543,7 +545,7 @@ export default function Home() {
 
 
       <Stats/>
-      <VideoTestimonials/>
+      
 
       <motion.section
   initial="initial"
