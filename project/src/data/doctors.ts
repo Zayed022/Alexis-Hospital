@@ -19,7 +19,7 @@ export const doctors: Doctor[] = [
     name: "Dr. Ganesh Ahire",
     title: "Consultant Physician – Internal Medicine",
     experience: "7+ Years Experience",
-    image: drGanesh, // ✅ Correct usage
+    image: "/assets/dr-ganesh.jpg", // ✅ Correct usage
 
     qualifications: [
       "MBBS, MD (Medicine) – KEM Hospital, Mumbai",
