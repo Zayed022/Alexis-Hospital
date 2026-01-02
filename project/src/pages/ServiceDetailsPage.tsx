@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 interface ServiceDetails {
   title: string;
@@ -40,131 +41,195 @@ export default function ServiceDetailsPage() {
 
   if (loading || !service) return null;
 
+  const pageUrl = `https://alexishospitalbhiwandi.com/services/${slug}`;
+
+  const isCosmetology =
+    service.category.toLowerCase().includes("cosmetology") ||
+    service.category.toLowerCase().includes("aesthetic");
+
+  const providerName = isCosmetology
+    ? "Renew+ Cosmetology Clinic"
+    : "Alexis Hospital";
+
+  const providerUrl = isCosmetology
+    ? "https://alexishospitalbhiwandi.com/cosmetology"
+    : "https://alexishospitalbhiwandi.com";
+
   return (
-    <div className="min-h-screen bg-white pt-24">
-      {/* ================= HERO ================= */}
-      <section className="bg-gradient-to-br from-[#A7D3F3]/20 via-white to-[#F7C6D3]/20 py-24">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <span className="inline-block mb-4 px-5 py-2 rounded-full text-sm font-semibold
-            bg-gradient-to-r from-[#0095ff] to-[#ff7197] text-white">
-            {service.category}
-          </span>
+    <>
+      {/* ================= SEO ================= */}
+      <Helmet>
+        <title>
+          {service.title} in Bhiwandi | {providerName}
+        </title>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-            {service.title}
-          </h1>
+        <meta
+          name="description"
+          content={`${service.title} in Bhiwandi at ${providerName}. ${service.shortDescription} Consult expert doctors at Alexis Hospital.`}
+        />
 
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {service.shortDescription}
-          </p>
-        </div>
-      </section>
+        <link rel="canonical" href={pageUrl} />
 
-      {/* ================= MAIN CONTENT ================= */}
-      <section className="py-24">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        {/* OPEN GRAPH */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${service.title} in Bhiwandi`} />
+        <meta
+          property="og:description"
+          content={service.shortDescription}
+        />
+        <meta property="og:url" content={pageUrl} />
+        {service.images[0] && (
+          <meta property="og:image" content={service.images[0]} />
+        )}
 
-          {/* LEFT CONTENT */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Service Overview
-            </h2>
+        {/* SERVICE SCHEMA */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": isCosmetology ? "MedicalProcedure" : "MedicalTherapy",
+            "name": service.title,
+            "description": service.longDescription,
+            "provider": {
+              "@type": isCosmetology ? "MedicalBusiness" : "Hospital",
+              "name": providerName,
+              "url": providerUrl,
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Bhiwandi",
+                "addressRegion": "Maharashtra",
+                "addressCountry": "IN",
+              },
+            },
+            "areaServed": {
+              "@type": "AdministrativeArea",
+              "name": "Bhiwandi",
+            },
+          })}
+        </script>
+      </Helmet>
 
-            <p className="text-gray-600 leading-relaxed mb-10">
-              {service.longDescription}
+      {/* ================= PAGE CONTENT ================= */}
+      <div className="min-h-screen bg-white pt-24">
+        {/* ================= HERO ================= */}
+        <section className="bg-gradient-to-br from-[#A7D3F3]/20 via-white to-[#F7C6D3]/20 py-24">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <span className="inline-block mb-4 px-5 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-[#0095ff] to-[#ff7197] text-white">
+              {service.category}
+            </span>
+
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              {service.title}
+            </h1>
+
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {service.shortDescription}
             </p>
+          </div>
+        </section>
 
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
-              What’s Included
-            </h3>
+        {/* ================= MAIN CONTENT ================= */}
+        <section className="py-24">
+          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* LEFT */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                Service Overview
+              </h2>
 
-            <ul className="space-y-3 mb-12">
-              {service.checklist.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-[#ff7197] mt-0.5" />
-                  <span className="text-gray-700">{item}</span>
-                </li>
-              ))}
-            </ul>
+              <p className="text-gray-600 leading-relaxed mb-10">
+                {service.longDescription}
+              </p>
 
-            {service.highlights.length > 0 && (
-              <>
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                  Why Choose This Service
-                </h3>
-                <ul className="space-y-3">
-                  {service.highlights.map((highlight, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <Star className="w-5 h-5 text-[#0095ff] mt-0.5" />
-                      <span className="text-gray-700 font-medium">
-                        {highlight}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </motion.div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                What’s Included
+              </h3>
 
-          {/* RIGHT IMAGES */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="lg:sticky lg:top-28 space-y-6"
-          >
-            {/* FEATURE IMAGE */}
-            {service.images[0] && (
-              <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-50 p-4">
-                <img
-                  src={service.images[0]}
-                  alt={service.title}
-                  className="w-full h-[320px] object-contain"
-                />
-              </div>
-            )}
+              <ul className="space-y-3 mb-12">
+                {service.checklist.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-[#ff7197] mt-0.5" />
+                    <span className="text-gray-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
 
-            {/* SUPPORTING IMAGES */}
-            <div className="grid grid-cols-2 gap-4">
-              {service.images.slice(1).map((img, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-2xl overflow-hidden shadow-md bg-gray-50 p-3"
-                >
+              {service.highlights.length > 0 && (
+                <>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    Why Choose This Service
+                  </h3>
+                  <ul className="space-y-3">
+                    {service.highlights.map((highlight, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <Star className="w-5 h-5 text-[#0095ff] mt-0.5" />
+                        <span className="text-gray-700 font-medium">
+                          {highlight}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </motion.div>
+
+            {/* RIGHT IMAGES */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="lg:sticky lg:top-28 space-y-6"
+            >
+              {service.images[0] && (
+                <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-50 p-4">
                   <img
-                    src={img}
-                    alt={`${service.title} ${idx + 2}`}
-                    className="w-full h-40 object-contain"
+                    src={service.images[0]}
+                    alt={`${service.title} in Bhiwandi`}
+                    className="w-full h-[320px] object-contain"
                   />
                 </div>
-              ))}
+              )}
+
+              <div className="grid grid-cols-2 gap-4">
+                {service.images.slice(1).map((img, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-2xl overflow-hidden shadow-md bg-gray-50 p-3"
+                  >
+                    <img
+                      src={img}
+                      alt={`${service.title} treatment ${idx + 2}`}
+                      className="w-full h-40 object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ================= META INFO ================= */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-4xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 gap-10 text-center">
+            <div>
+              <p className="text-gray-500 mb-1">Price Range</p>
+              <p className="text-2xl font-bold text-[#0095ff]">
+                {service.priceRange}
+              </p>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* ================= META INFO ================= */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 gap-10 text-center">
-          <div>
-            <p className="text-gray-500 mb-1">Price Range</p>
-            <p className="text-2xl font-bold text-[#0095ff]">
-              {service.priceRange}
-            </p>
+            <div>
+              <p className="text-gray-500 mb-1">Duration</p>
+              <p className="text-2xl font-bold text-[#0095ff]">
+                {service.duration}
+              </p>
+            </div>
           </div>
-
-          <div>
-            <p className="text-gray-500 mb-1">Duration</p>
-            <p className="text-2xl font-bold text-[#0095ff]">
-              {service.duration}
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }
