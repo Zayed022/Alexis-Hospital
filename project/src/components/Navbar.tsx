@@ -53,6 +53,7 @@ export default function Navbar() {
   bg-white/95
   backdrop-blur
   shadow-sm
+  sm:mb-22
 ">
 
       <div className="max-w-7xl mx-auto px-4">

@@ -6,7 +6,7 @@ const images = [
 
 export default function Gallery() {
   return (
-    <section className="relative py-24 mt-10 overflow-hidden font-heading">
+    <section className="relative py-24 mt-10 overflow-hidden font-heading sm: mt-24">
       {/* BACKGROUND */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#A7D3F3]/12 via-white to-[#F7C6D3]/12" />
 

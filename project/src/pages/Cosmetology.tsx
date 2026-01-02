@@ -41,7 +41,7 @@ export default function Cosmetology() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-16 sm:pt-20 font-heading">
+    <div className="min-h-screen bg-white pt-16 sm:pt-20 font-heading sm: mt-20">
       {/* HERO */}
       <CosmoService />
 

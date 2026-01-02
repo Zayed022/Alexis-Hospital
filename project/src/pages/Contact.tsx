@@ -110,7 +110,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-16 md:pt-20 font-heading">
+    <div className="min-h-screen bg-white pt-16 md:pt-20 font-heading sm: mt-20">
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

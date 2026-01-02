@@ -37,15 +37,22 @@ export default function About() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-16 md:pt-20 sm:pt-8">
+    <div className="min-h-screen bg-white pt-[120px] md:pt-[96px]">
+
 
       {/* HERO */}
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative py-12 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#A7D3F3]/15 via-white to-[#F7C6D3]/15"
+        
+  className="
+    relative
+    pt-[140px] md:pt-[120px]
+    pb-12 md:pb-24
+    px-4 sm:px-6 lg:px-8
+  "
       >
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto text-center sm:mt-18">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

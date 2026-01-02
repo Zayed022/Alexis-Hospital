@@ -129,7 +129,7 @@ export default function ServiceDetailsPage() {
 
         {/* ================= MAIN CONTENT ================= */}
         <section className="py-24">
-          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 sm: mt-4">
             {/* LEFT */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}

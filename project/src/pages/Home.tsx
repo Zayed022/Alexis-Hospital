@@ -99,16 +99,14 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <section
-  className="
-    relative
-    pt-28 sm:pt-32 md:pt-36
-    min-h-[90vh] md:min-h-screen
-    flex items-center justify-center
-    overflow-hidden
-  "
->
+    <div className="min-h-screen bg-white sm: mt-8">
+      <section className="
+  relative
+  pt-[140px] md:pt-[120px]
+  min-h-[90vh]
+  flex items-center justify-center
+">
+
   {/* Background */}
   <div className="absolute inset-0 " />
 

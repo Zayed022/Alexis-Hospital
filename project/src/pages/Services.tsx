@@ -9,7 +9,7 @@ export default function Services() {
   const [activeTab, setActiveTab] = useState<Category>("Medical");
 
   return (
-    <div className="min-h-screen bg-white pt-20 sm:pt-24 overflow-x-hidden">
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 overflow-x-hidden sm: mt-12">
       {/* ================= HERO ================= */}
       <motion.section
         initial={{ opacity: 0 }}
