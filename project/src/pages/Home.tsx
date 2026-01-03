@@ -100,150 +100,72 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white sm: mt-8">
-      <section className="
-  relative
-  pt-[140px] md:pt-[120px]
-  min-h-[90vh]
-  flex items-center justify-center
-">
+      <h1 className="sr-only">
+        Alexis Hospital Bhiwandi – Best Multispecialty & Cosmetology Hospital
+      </h1>
 
-  {/* Background */}
-  <div className="absolute inset-0 " />
+      {/* ================= HERO ================= */}
+      <section className="relative pt-[140px] md:pt-[120px] min-h-[90vh] flex items-center justify-center">
 
-  {/* Ambient Blobs (responsive) */}
-  <motion.div
-    className="
-      absolute
-      top-20 left-6 sm:left-16
-      w-56 h-56 sm:w-72 sm:h-72
-      
-      rounded-full blur-3xl
-    "
-    animate={{ scale: [1, 1.15, 1] }}
-    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-  />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
 
-  <motion.div
-    className="
-      absolute
-      bottom-20 right-6 sm:right-16
-      w-72 h-72 sm:w-96 sm:h-96
-      
-      rounded-full blur-3xl
-    "
-    animate={{ scale: [1, 1.2, 1] }}
-    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-  />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center bg-gradient-to-r from-[#0095ff] to-[#ff7197]
+                       mb-6 px-5 py-2 rounded-full shadow-sm"
+          >
+            <span className="text-xs sm:text-sm font-semibold text-white">
+              Excellence in Healthcare & Aesthetics
+            </span>
+          </motion.div>
 
-  {/* Content */}
-  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight"
+          >
+            <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+              Advanced Healthcare
+            </span>
+            <br />
+            <span className="text-[#0b1324]">& Premium Cosmetology</span>
+            <br />
+            <span className="text-[#0b1324]">Under One Roof</span>
+          </motion.h2>
 
-    {/* Premium Tagline */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="
-        inline-flex items-center bg-gradient-to-r from-[#0095ff] to-[#ff7197]
-        mb-6 sm:mb-8
-        px-5 py-2
-        rounded-full
-         backdrop-blur
-        border border-gray-200
-        shadow-sm
-      "
-    >
-      <span className="text-xs sm:text-sm font-semibold tracking-wide text-[#ffffff] font-heading">
-        Excellence in Healthcare & Aesthetics
-      </span>
-    </motion.div>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            Trusted multispecialty hospital in Bhiwandi offering expert medical care
+            and Renew+ cosmetology services.
+          </p>
 
-    {/* Heading */}
-    <motion.h1
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="
-        text-4xl sm:text-5xl md:text-6xl lg:text-7xl
-        font-extrabold
-        mb-6 sm:mb-8
-        leading-tight
-      "
-    >
-      <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent font-heading">
-        Advanced Healthcare
-      </span>
-      <br />
-      <span className="text-[#0b1324] font-heading">
-        & Premium Cosmetology
-      </span>
-      <br />
-      <span className="text-[#0b1324] font-heading">
-        Under One Roof
-      </span>
-    </motion.h1>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/booking">
+              <button className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] text-white
+                                 px-8 py-4 rounded-full font-semibold shadow-xl">
+                Book Appointment
+              </button>
+            </Link>
+            <Link to="/services">
+              <button className="bg-white text-[#0b1324] px-8 py-4 rounded-full
+                                 font-semibold shadow-md border">
+                View Services
+              </button>
+            </Link>
+          </div>
 
-    {/* Optional short supporting line (UX improvement) */}
-    <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto mb-8 font-body">
-      World-class medical care and advanced cosmetology, delivered with precision,
-      trust, and compassion.
-    </p>
+        </div>
+      </section>
 
-    {/* CTAs */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-      className="
-        flex flex-col sm:flex-row
-        gap-4 sm:gap-5
-        justify-center
-      "
-    >
-      <Link to="/booking">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.96 }}
-          className="
-            bg-gradient-to-r from-[#0095ff] to-[#ff7197]
-            text-white
-            px-8 sm:px-9
-            py-3.5 sm:py-4
-            rounded-full
-            font-semibold
-            text-base sm:text-lg
-            shadow-xl hover:shadow-2xl
-            transition font-body
-          "
-        >
-          Book Appointment
-        </motion.button>
-      </Link>
-
-      <Link to="/services">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.96 }}
-          className="
-            bg-white
-            text-[#0b1324]
-            px-8 sm:px-9
-            py-3.5 sm:py-4
-            rounded-full
-            font-semibold
-            text-base sm:text-lg
-            shadow-md hover:shadow-lg
-            border border-gray-200
-            transition
-          "
-        >
-          View Our Services
-        </motion.button>
-      </Link>
-    </motion.div>
-
-  </div>
-</section>
+      <div className="sr-only">
+        <Link to="/services">Medical Services in Bhiwandi</Link>
+        <Link to="/services/cosmetology">Cosmetology Services in Bhiwandi</Link>
+        <Link to="/doctors/dr-ganesh-ahire">Dr. Ganesh Ahire</Link>
+        <Link to="/doctors/dr-ahmed-khan">Dr. Ahmed Khan</Link>
+        <Link to="/doctors/dr-saman-ahmed-khan">Dr. Saman Ahmed Khan</Link>
+      </div>
 
 
       <VideoTestimonials/>
