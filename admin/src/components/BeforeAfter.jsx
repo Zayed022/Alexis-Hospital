@@ -8,10 +8,7 @@ export default function BeforeAfter() {
   const [submitting, setSubmitting] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
-  const [preview, setPreview] = useState({
-    before: null,
-    after: null,
-  });
+  const [preview, setPreview] = useState({ before: null, after: null });
 
   const [form, setForm] = useState({
     title: "",
@@ -29,8 +26,6 @@ export default function BeforeAfter() {
       const res = await fetch(API);
       const data = await res.json();
       if (data.success) setCases(data.cases);
-    } catch (err) {
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -54,10 +49,8 @@ export default function BeforeAfter() {
     setEditingId(null);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((p) => ({ ...p, [name]: value }));
-  };
+  const handleChange = (e) =>
+    setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
   const handleImage = (e) => {
     const { name, files } = e.target;
@@ -71,7 +64,7 @@ export default function BeforeAfter() {
     }));
   };
 
-  /* ================= CREATE / UPDATE ================= */
+  /* ================= SUBMIT ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -81,27 +74,21 @@ export default function BeforeAfter() {
       if (v !== null && v !== "") fd.append(k, v);
     });
 
-    try {
-      const res = await fetch(editingId ? `${API}/${editingId}` : API, {
-        method: editingId ? "PUT" : "POST",
-        body: fd,
-      });
+    const res = await fetch(editingId ? `${API}/${editingId}` : API, {
+      method: editingId ? "PUT" : "POST",
+      body: fd,
+    });
 
-      const data = await res.json();
-      if (data.success) {
-        fetchCases();
-        resetForm();
-      } else {
-        alert(data.message);
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSubmitting(false);
-    }
+    const data = await res.json();
+    if (data.success) {
+      fetchCases();
+      resetForm();
+    } else alert(data.message);
+
+    setSubmitting(false);
   };
 
-  /* ================= EDIT ================= */
+  /* ================= EDIT / DELETE ================= */
   const handleEdit = (c) => {
     setEditingId(c._id);
     setForm({
@@ -112,14 +99,10 @@ export default function BeforeAfter() {
       beforeImage: null,
       afterImage: null,
     });
-    setPreview({
-      before: c.beforeImage,
-      after: c.afterImage,
-    });
+    setPreview({ before: c.beforeImage, after: c.afterImage });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  /* ================= DELETE ================= */
   const handleDelete = async (id) => {
     if (!confirm("Delete this case permanently?")) return;
     await fetch(`${API}/${id}`, { method: "DELETE" });
@@ -128,82 +111,119 @@ export default function BeforeAfter() {
 
   /* ================================================= */
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-6">
-        Before / After Case Management
-      </h1>
+    <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-10 space-y-10">
+      {/* HEADER */}
+      <div>
+        <h1 className="text-xl sm:text-2xl font-semibold text-gray-800">
+          Before / After Case Management
+        </h1>
+        <p className="text-sm text-gray-500 mt-1">
+          Manage treatment transformation cases
+        </p>
+      </div>
 
       {/* ================= FORM ================= */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white border rounded-xl p-6 shadow-sm space-y-4"
+        className="bg-white border rounded-2xl p-5 sm:p-6 shadow-sm space-y-6"
       >
-        <div className="grid md:grid-cols-2 gap-4">
-          <input
-            name="title"
-            value={form.title}
+        {/* BASIC INFO */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Case Title
+            </label>
+            <input
+              name="title"
+              value={form.title}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-black/20"
+              placeholder="Enter case title"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Service Category
+            </label>
+            <select
+              name="serviceCategory"
+              value={form.serviceCategory}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-black/20"
+            >
+              <option>Medical</option>
+              <option>Cosmetology</option>
+            </select>
+          </div>
+        </div>
+
+        {/* DESCRIPTION */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Description
+          </label>
+          <textarea
+            name="description"
+            value={form.description}
             onChange={handleChange}
-            placeholder="Case Title"
-            className="input"
-            required
+            className="w-full border rounded-lg px-3 py-2 min-h-[100px] focus:ring-2 focus:ring-black/20"
+            placeholder="Brief case description"
           />
-          <select
-            name="serviceCategory"
-            value={form.serviceCategory}
+        </div>
+
+        {/* ORDER */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Display Order
+          </label>
+          <input
+            type="number"
+            name="order"
+            value={form.order}
             onChange={handleChange}
-            className="input"
-          >
-            <option>Medical</option>
-            <option>Cosmetology</option>
-          </select>
+            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-black/20"
+            placeholder="Order number"
+          />
         </div>
 
-        <textarea
-          name="description"
-          value={form.description}
-          onChange={handleChange}
-          placeholder="Description"
-          className="input min-h-[90px]"
-        />
+        {/* IMAGES */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            { key: "beforeImage", label: "Before Image", prev: "before" },
+            { key: "afterImage", label: "After Image", prev: "after" },
+          ].map(({ key, label, prev }) => (
+            <div key={key} className="border rounded-xl p-4">
+              <p className="text-sm font-medium text-gray-700 mb-2">
+                {label}
+              </p>
 
-        <input
-          type="number"
-          name="order"
-          value={form.order}
-          onChange={handleChange}
-          placeholder="Display Order"
-          className="input"
-        />
+              <label className="block border-2 border-dashed rounded-lg px-4 py-6 text-center text-sm text-gray-500 cursor-pointer hover:border-black hover:text-black">
+                <input
+                  type="file"
+                  name={key}
+                  onChange={handleImage}
+                  className="hidden"
+                />
+                Click to upload image
+              </label>
 
-        {/* Images */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <label className="block font-medium mb-1">Before Image</label>
-            <input type="file" name="beforeImage" onChange={handleImage} />
-            {preview.before && (
-              <img
-                src={preview.before}
-                className="mt-2 h-32 w-full object-cover rounded border"
-              />
-            )}
-          </div>
-
-          <div>
-            <label className="block font-medium mb-1">After Image</label>
-            <input type="file" name="afterImage" onChange={handleImage} />
-            {preview.after && (
-              <img
-                src={preview.after}
-                className="mt-2 h-32 w-full object-cover rounded border"
-              />
-            )}
-          </div>
+              {preview[prev] && (
+                <img
+                  src={preview[prev]}
+                  className="mt-3 h-40 w-full object-cover rounded-lg border"
+                />
+              )}
+            </div>
+          ))}
         </div>
 
-        <div className="flex gap-3 pt-2">
+        {/* ACTIONS */}
+        <div className="flex flex-col sm:flex-row gap-3">
           <button
             disabled={submitting}
-            className="bg-black text-white px-6 py-2 rounded"
+            className="bg-black text-white px-6 py-2 rounded-lg w-full sm:w-auto disabled:opacity-60"
           >
             {editingId ? "Update Case" : "Create Case"}
           </button>
@@ -212,7 +232,7 @@ export default function BeforeAfter() {
             <button
               type="button"
               onClick={resetForm}
-              className="border px-6 py-2 rounded"
+              className="border px-6 py-2 rounded-lg w-full sm:w-auto"
             >
               Cancel
             </button>
@@ -221,8 +241,10 @@ export default function BeforeAfter() {
       </form>
 
       {/* ================= LIST ================= */}
-      <div className="mt-10">
-        <h2 className="text-xl font-semibold mb-4">All Cases</h2>
+      <div>
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">
+          All Cases
+        </h2>
 
         {loading ? (
           <p>Loading...</p>
@@ -231,36 +253,30 @@ export default function BeforeAfter() {
             {cases.map((c) => (
               <div
                 key={c._id}
-                className="border rounded-xl p-4 flex flex-col md:flex-row gap-4 items-start"
+                className="bg-white border rounded-xl p-4 flex flex-col lg:flex-row gap-4 items-start"
               >
                 <div className="flex gap-2">
-                  <img
-                    src={c.beforeImage}
-                    className="w-32 h-20 object-cover rounded"
-                  />
-                  <img
-                    src={c.afterImage}
-                    className="w-32 h-20 object-cover rounded"
-                  />
+                  <img src={c.beforeImage} className="w-28 h-20 object-cover rounded" />
+                  <img src={c.afterImage} className="w-28 h-20 object-cover rounded" />
                 </div>
 
                 <div className="flex-1">
-                  <p className="font-medium">{c.title}</p>
+                  <p className="font-medium text-gray-800">{c.title}</p>
                   <p className="text-sm text-gray-500">
-                    {c.serviceCategory} | Order {c.order}
+                    {c.serviceCategory} • Order {c.order}
                   </p>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full lg:w-auto">
                   <button
                     onClick={() => handleEdit(c)}
-                    className="border px-4 py-1 rounded"
+                    className="border px-4 py-1 rounded flex-1 lg:flex-none"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(c._id)}
-                    className="border px-4 py-1 rounded text-red-600"
+                    className="border px-4 py-1 rounded text-red-600 flex-1 lg:flex-none"
                   >
                     Delete
                   </button>
@@ -273,9 +289,3 @@ export default function BeforeAfter() {
     </div>
   );
 }
-
-/* Global Tailwind helper:
-.input {
-  @apply border rounded px-3 py-2 w-full;
-}
-*/

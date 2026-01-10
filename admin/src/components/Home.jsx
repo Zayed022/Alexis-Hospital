@@ -1,36 +1,60 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const actions = [
-  { title: 'Home Banner', path: '/homeBanner' },
-  { title: 'Service Banner', path: '/serviceBanner' },
-  { title: 'Before After Cases', path: '/beforeAfter' },
-  { title: 'Service Cards', path: '/serviceCards' },
-  { title: 'CTA Image', path: '/ctaImage' },
-  
+  { title: "Home Banner", path: "/homeBanner" },
+  { title: "Service Banner", path: "/serviceBanner" },
+  { title: "Before After Cases", path: "/beforeAfter" },
+  { title: "Service Cards", path: "/serviceCards" },
+  { title: "CTA Image", path: "/ctaImage" },
 ];
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="p-8 w-full">
-      <h1 className="text-3xl font-semibold text-gray-800 mb-8">Alexis Hospital Admin Management</h1>
+    <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-10 space-y-8">
+      {/* ================= HEADER ================= */}
+      <div>
+        <h1 className="text-xl sm:text-3xl lg:text-4xl font-semibold text-gray-800">
+          Alexis Hospital Admin
+        </h1>
+        <p className="text-sm sm:text-base text-gray-500 mt-1">
+          Manage website banners, services, and content sections
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* ================= DASHBOARD GRID ================= */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {actions.map((action, index) => (
-          <div
+          <button
             key={index}
             onClick={() => navigate(action.path)}
-            className="cursor-pointer group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all p-6"
+            className="group text-left bg-white border rounded-2xl p-5 sm:p-6 shadow-sm
+                       hover:shadow-lg hover:border-gray-300
+                       active:scale-[0.98] transition-all"
           >
-            <div className="text-sm text-gray-400 mb-1 group-hover:text-indigo-500 transition-colors">
-              {String(index + 1).padStart(2, '0')}
+            {/* INDEX BADGE */}
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xs font-medium text-gray-400 group-hover:text-indigo-500">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-500 group-hover:bg-indigo-50 group-hover:text-indigo-600">
+                Manage
+              </span>
             </div>
-            <h3 className="text-lg font-medium text-gray-700 group-hover:text-indigo-600 transition-colors">
+
+            {/* TITLE */}
+            <h3 className="text-base sm:text-lg font-medium text-gray-800 group-hover:text-indigo-600 transition-colors">
               {action.title}
             </h3>
-          </div>
+
+            {/* SUBTEXT */}
+            <p className="text-sm text-gray-500 mt-1">
+              Configure and update {action.title.toLowerCase()}
+            </p>
+          </button>
         ))}
       </div>
     </div>

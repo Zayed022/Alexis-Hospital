@@ -30,8 +30,6 @@ export default function ServiceCards() {
       const res = await fetch(API);
       const data = await res.json();
       if (data.success) setServices(data.services);
-    } catch (err) {
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -41,7 +39,7 @@ export default function ServiceCards() {
     fetchServices();
   }, []);
 
-  /* ================= FORM HELPERS ================= */
+  /* ================= HELPERS ================= */
   const resetForm = () => {
     setForm({
       title: "",
@@ -88,43 +86,34 @@ export default function ServiceCards() {
     setImagePreview(files.map((f) => URL.createObjectURL(f)));
   };
 
-  /* ================= CREATE / UPDATE ================= */
+  /* ================= SUBMIT ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
 
     const fd = new FormData();
     Object.entries(form).forEach(([key, value]) => {
-      if (key === "images") {
-        value.forEach((img) => fd.append("images", img));
-      } else if (Array.isArray(value)) {
+      if (key === "images") value.forEach((img) => fd.append("images", img));
+      else if (Array.isArray(value))
         fd.append(key, JSON.stringify(value.filter(Boolean)));
-      } else if (value !== "") {
-        fd.append(key, value);
-      }
+      else if (value !== "") fd.append(key, value);
     });
 
-    try {
-      const res = await fetch(editingId ? `${API}/${editingId}` : API, {
-        method: editingId ? "PUT" : "POST",
-        body: fd,
-      });
-      const data = await res.json();
+    const res = await fetch(editingId ? `${API}/${editingId}` : API, {
+      method: editingId ? "PUT" : "POST",
+      body: fd,
+    });
 
-      if (data.success) {
-        fetchServices();
-        resetForm();
-      } else {
-        alert(data.message);
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSubmitting(false);
-    }
+    const data = await res.json();
+    if (data.success) {
+      fetchServices();
+      resetForm();
+    } else alert(data.message);
+
+    setSubmitting(false);
   };
 
-  /* ================= EDIT ================= */
+  /* ================= EDIT / DELETE ================= */
   const handleEdit = (s) => {
     setEditingId(s._id);
     setForm({
@@ -144,65 +133,178 @@ export default function ServiceCards() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  /* ================= DELETE ================= */
   const handleDelete = async (id) => {
     if (!confirm("Delete this service permanently?")) return;
     await fetch(`${API}/${id}`, { method: "DELETE" });
     fetchServices();
   };
 
-  /* ================================================== */
+  /* ================================================= */
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-6">
-        Service Details Management
-      </h1>
+    <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-10 space-y-10">
+      {/* HEADER */}
+      <div>
+        <h1 className="text-xl sm:text-3xl font-semibold text-gray-800">
+          Service Details Management
+        </h1>
+        <p className="text-sm sm:text-base text-gray-500 mt-1">
+          Manage detailed service cards shown on the website
+        </p>
+      </div>
 
       {/* ================= FORM ================= */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white border rounded-xl p-6 space-y-4 shadow-sm"
+        className="bg-white border rounded-2xl p-5 sm:p-6 shadow-sm space-y-6"
       >
-        <div className="grid md:grid-cols-2 gap-4">
-          <input name="title" value={form.title} onChange={handleChange} placeholder="Title" className="input" />
-          <input name="slug" value={form.slug} onChange={handleChange} placeholder="Unique Slug" className="input" />
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+          <h2 className="text-lg sm:text-xl font-medium">
+            {editingId ? "Edit Service" : "Create New Service"}
+          </h2>
+          {editingId && (
+            <span className="text-xs px-3 py-1 rounded-full bg-blue-50 text-blue-600 w-fit">
+              Editing Mode
+            </span>
+          )}
         </div>
 
-        <textarea name="shortDescription" value={form.shortDescription} onChange={handleChange} placeholder="Short Description" className="input" />
-        <textarea name="longDescription" value={form.longDescription} onChange={handleChange} placeholder="Long Description" className="input min-h-[120px]" />
-
-        {/* Checklist */}
-        <SectionArray title="Checklist" items={form.checklist} onAdd={() => addArrayItem("checklist")} onRemove={(i) => removeArrayItem("checklist", i)} onChange={(i, v) => handleArrayChange("checklist", i, v)} />
-
-        {/* Highlights */}
-        <SectionArray title="Highlights" items={form.highlights} onAdd={() => addArrayItem("highlights")} onRemove={(i) => removeArrayItem("highlights", i)} onChange={(i, v) => handleArrayChange("highlights", i, v)} />
-
-        <div className="grid md:grid-cols-4 gap-4">
-          <input name="priceRange" value={form.priceRange} onChange={handleChange} placeholder="Price Range" className="input" />
-          <input name="duration" value={form.duration} onChange={handleChange} placeholder="Duration" className="input" />
-          <input name="order" type="number" value={form.order} onChange={handleChange} placeholder="Order" className="input" />
-          <select name="category" value={form.category} onChange={handleChange} className="input">
-            <option>Medical</option>
-            <option>Cosmetology</option>
-          </select>
+        {/* BASIC INFO */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            ["title", "Title"],
+            ["slug", "Unique Slug"],
+          ].map(([name, label]) => (
+            <div key={name}>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {label}
+              </label>
+              <input
+                name={name}
+                value={form[name]}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-black/20"
+              />
+            </div>
+          ))}
         </div>
 
-        {/* Images */}
-        <input type="file" multiple onChange={handleImages} />
-        {imagePreview.length > 0 && (
-          <div className="flex gap-2 flex-wrap">
-            {imagePreview.map((img, i) => (
-              <img key={i} src={img} className="h-20 w-28 object-cover rounded border" />
-            ))}
+        {/* DESCRIPTIONS */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Short Description
+          </label>
+          <textarea
+            name="shortDescription"
+            value={form.shortDescription}
+            onChange={handleChange}
+            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-black/20"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Long Description
+          </label>
+          <textarea
+            name="longDescription"
+            value={form.longDescription}
+            onChange={handleChange}
+            className="w-full border rounded-lg px-3 py-2 min-h-[120px] focus:ring-2 focus:ring-black/20"
+          />
+        </div>
+
+        {/* ARRAYS */}
+        <SectionArray
+          title="Checklist"
+          items={form.checklist}
+          onAdd={() => addArrayItem("checklist")}
+          onRemove={(i) => removeArrayItem("checklist", i)}
+          onChange={(i, v) => handleArrayChange("checklist", i, v)}
+        />
+
+        <SectionArray
+          title="Highlights"
+          items={form.highlights}
+          onAdd={() => addArrayItem("highlights")}
+          onRemove={(i) => removeArrayItem("highlights", i)}
+          onChange={(i, v) => handleArrayChange("highlights", i, v)}
+        />
+
+        {/* META */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            ["priceRange", "Price Range"],
+            ["duration", "Duration"],
+            ["order", "Display Order"],
+          ].map(([name, label]) => (
+            <div key={name}>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {label}
+              </label>
+              <input
+                name={name}
+                value={form[name]}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-black/20"
+              />
+            </div>
+          ))}
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Category
+            </label>
+            <select
+              name="category"
+              value={form.category}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-black/20"
+            >
+              <option>Medical</option>
+              <option>Cosmetology</option>
+            </select>
           </div>
-        )}
+        </div>
 
-        <div className="flex gap-3">
-          <button className="bg-black text-white px-6 py-2 rounded">
+        {/* IMAGES */}
+        <div>
+          <p className="text-sm font-medium text-gray-700 mb-1">
+            Service Images (1–4)
+          </p>
+
+          <label className="block border-2 border-dashed rounded-xl px-4 py-8 text-center text-sm text-gray-500 cursor-pointer hover:border-black hover:text-black">
+            <input type="file" multiple onChange={handleImages} className="hidden" />
+            Click to upload images
+          </label>
+
+          {imagePreview.length > 0 && (
+            <div className="mt-3 flex gap-2 flex-wrap">
+              {imagePreview.map((img, i) => (
+                <img
+                  key={i}
+                  src={img}
+                  className="h-20 w-28 object-cover rounded-lg border"
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* ACTIONS */}
+        <div className="flex flex-col sm:flex-row gap-3 pt-2">
+          <button
+            disabled={submitting}
+            className="bg-black text-white px-6 py-2 rounded-lg w-full sm:w-auto disabled:opacity-60"
+          >
             {editingId ? "Update Service" : "Create Service"}
           </button>
+
           {editingId && (
-            <button type="button" onClick={resetForm} className="border px-6 py-2 rounded">
+            <button
+              type="button"
+              onClick={resetForm}
+              className="border px-6 py-2 rounded-lg w-full sm:w-auto"
+            >
               Cancel
             </button>
           )}
@@ -210,24 +312,45 @@ export default function ServiceCards() {
       </form>
 
       {/* ================= LIST ================= */}
-      <div className="mt-10">
-        <h2 className="text-xl font-semibold mb-4">All Services</h2>
+      <div>
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">
+          All Services
+        </h2>
+
         {loading ? (
           <p>Loading...</p>
         ) : (
           <div className="grid gap-4">
             {services.map((s) => (
-              <div key={s._id} className="border rounded-xl p-4 flex gap-4">
-                <img src={s.images?.[0]} className="w-32 h-20 object-cover rounded" />
+              <div
+                key={s._id}
+                className="bg-white border rounded-xl p-4 flex flex-col lg:flex-row gap-4 items-start"
+              >
+                <img
+                  src={s.images?.[0]}
+                  className="w-full sm:w-32 h-24 object-cover rounded-lg"
+                />
+
                 <div className="flex-1">
-                  <p className="font-medium">{s.title}</p>
+                  <p className="font-medium text-gray-800">{s.title}</p>
                   <p className="text-sm text-gray-500">
-                    {s.category} | {s.slug} | Order {s.order}
+                    {s.category} • {s.slug} • Order {s.order}
                   </p>
                 </div>
-                <div className="flex gap-2">
-                  <button onClick={() => handleEdit(s)} className="border px-4 py-1 rounded">Edit</button>
-                  <button onClick={() => handleDelete(s._id)} className="border px-4 py-1 rounded text-red-600">Delete</button>
+
+                <div className="flex gap-2 w-full lg:w-auto">
+                  <button
+                    onClick={() => handleEdit(s)}
+                    className="border px-4 py-1 rounded flex-1 lg:flex-none"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(s._id)}
+                    className="border px-4 py-1 rounded text-red-600 flex-1 lg:flex-none"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}
@@ -238,30 +361,40 @@ export default function ServiceCards() {
   );
 }
 
-/* ================= Helper Component ================= */
+/* ================= Helper ================= */
 function SectionArray({ title, items, onAdd, onRemove, onChange }) {
   return (
     <div>
-      <p className="font-medium mb-2">{title}</p>
-      {items.map((v, i) => (
-        <div key={i} className="flex gap-2 mb-2">
-          <input value={v} onChange={(e) => onChange(i, e.target.value)} className="input flex-1" />
-          {items.length > 1 && (
-            <button type="button" onClick={() => onRemove(i)} className="px-3 border rounded">
-              ✕
-            </button>
-          )}
-        </div>
-      ))}
-      <button type="button" onClick={onAdd} className="text-sm underline">
+      <p className="text-sm font-medium text-gray-700 mb-2">{title}</p>
+
+      <div className="space-y-2">
+        {items.map((v, i) => (
+          <div key={i} className="flex gap-2">
+            <input
+              value={v}
+              onChange={(e) => onChange(i, e.target.value)}
+              className="flex-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-black/20"
+            />
+            {items.length > 1 && (
+              <button
+                type="button"
+                onClick={() => onRemove(i)}
+                className="px-3 border rounded-lg text-red-600"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        onClick={onAdd}
+        className="mt-2 text-sm text-indigo-600 underline"
+      >
         + Add {title}
       </button>
     </div>
   );
 }
-
-/* Global Tailwind helper:
-.input {
-  @apply border rounded px-3 py-2 w-full;
-}
-*/

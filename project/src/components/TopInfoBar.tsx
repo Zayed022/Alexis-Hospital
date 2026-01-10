@@ -16,8 +16,8 @@ export default function TopInfoBar() {
 
         {/* LEFT INFO - Hidden on mobile, shown on md and up */}
         <div className="hidden md:flex items-center gap-4 lg:gap-6">
-          <InfoItem icon={<Phone size={14} className="sm:w-4 sm:h-4 md:w-[16px] md:h-[16px]" />} href="tel:+919028111592">
-            <span className="whitespace-nowrap">+91 90281 11592</span>
+          <InfoItem icon={<Phone size={14} className="sm:w-4 sm:h-4 md:w-[16px] md:h-[16px]" />} href="tel:+919699933358">
+            <span className="whitespace-nowrap">+91 9699933358</span>
           </InfoItem>
 
           <div className="hidden lg:block">
