@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 
 const images = [
-  "/gallery-1.jpg",
+  "/gallery1.png",
+  "/gallery2.png",
 ];
 
 export default function Gallery() {

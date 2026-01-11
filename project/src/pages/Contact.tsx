@@ -34,7 +34,7 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   
-    const clientWhatsAppNumber = "917498881947"; 
+    const clientWhatsAppNumber = "919699933358"; 
     // 👆 Use country code, no +, no spaces
   
     const whatsappMessage = `
@@ -66,7 +66,7 @@ export default function Contact() {
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+1 (555) 123-4567', '+1 (555) 123-4568', 'Mon-Fri: 9AM - 6PM'],
+      details: ['+91 9699933358', 'Mon-Fri: 9AM - 6PM'],
       color: 'from-[#0095ff] to-[#ff7197]/70',
     },
     {
@@ -99,7 +99,7 @@ export default function Contact() {
     },
     {
       title: 'Hospital Emergency',
-      phone: '+1 (555) 123-HELP',
+      phone: '+91 9699933358',
       description: 'Direct emergency line',
     },
   ];
