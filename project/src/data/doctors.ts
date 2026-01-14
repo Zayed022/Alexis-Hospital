@@ -144,6 +144,47 @@ export const doctors: Doctor[] = [
     "Member – Professional Cosmetology & Aesthetic Associations",
   ],
 },
+{
+  slug: "dr-khwaja-moinuddin",
+  name: "Dr. Khwaja Moinuddin",
+  title: "Consultant Pediatrician & Neonatologist (New Born & Child Specialist)",
+  experience: "10+ Years Experience in Pediatrics & Neonatal Care",
+  image: "/moinuddin.jpg",
+
+  qualifications: [
+    "MBBS",
+    "DCH – Diploma in Child Health",
+    "MD – Pediatrics",
+    "PGPN – Post Graduate Program in Neonatology (Boston)",
+  ],
+
+  description: [
+    "Dr. Khwaja Moinuddin is a highly experienced Pediatrician and Neonatologist specializing in newborn and child healthcare.",
+    "He has extensive expertise in managing neonatal emergencies, childhood illnesses, growth and developmental monitoring, and preventive pediatric care.",
+    "He is known for his calm approach, accurate diagnosis, and compassionate care for infants, children, and their families.",
+  ],
+
+  expertise: [
+    "Newborn & Neonatal Care",
+    "Pediatric Emergencies",
+    "Childhood Infections & Immunization",
+    "Growth & Development Assessment",
+    "Neonatal Intensive Care (NICU)",
+    "Pediatric Respiratory & Gastrointestinal Disorders",
+  ],
+
+  experienceDetails: [
+    "Consultant Pediatrician & Neonatologist",
+    "Specialist in Newborn & Child Emergency Care",
+    "OPD Consultant – Evening Practice (9:00 PM – 10:00 PM)",
+    "24 Hours Pediatric & Neonatal Emergency Services",
+  ],
+
+  memberships: [
+    "Member – Indian Academy of Pediatrics (IAP)",
+    "Member – Neonatology & Child Health Associations",
+  ],
+},
 
 
 

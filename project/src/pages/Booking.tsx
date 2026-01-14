@@ -131,7 +131,7 @@ ${formData.message || "No additional notes"}
             className="text-5xl md:text-6xl font-bold text-gray-800 mb-6"
           >
             Book Your{' '}
-            <span className="bg-gradient-to-r from-[#A7D3F3] to-[#F7C6D3] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
               Appointment
             </span>
           </motion.h1>
@@ -183,7 +183,7 @@ ${formData.message || "No additional notes"}
                     transition={{ delay: 0.2 + index * 0.1 }}
                     className="flex items-start space-x-4"
                   >
-                    <div className="bg-gradient-to-br from-[#A7D3F3] to-[#F7C6D3] p-3 rounded-xl flex-shrink-0">
+                    <div className="bg-gradient-to-br from-[#0095ff] to-[#ff7197] p-3 rounded-xl flex-shrink-0">
                       <item.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -362,7 +362,7 @@ ${formData.message || "No additional notes"}
                       type="submit"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full bg-gradient-to-r from-[#A7D3F3] to-[#F7C6D3] text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all"
+                      className="w-full bg-gradient-to-r from-[#0095ff] to-[#ff7197] text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all"
                     >
                       Confirm Appointment
                     </motion.button>

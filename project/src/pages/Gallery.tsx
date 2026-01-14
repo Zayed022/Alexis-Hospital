@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 const images = [
   "/gallery1.png",
   "/gallery2.png",
+  "/banner1.jpg",
+  "/banner2.jpg",
+  "/banner3.jpeg",
+  "/banner4.jpeg",
+  
 ];
 
 export default function Gallery() {
