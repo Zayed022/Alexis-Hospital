@@ -24,7 +24,7 @@ export default function Booking() {
     });
   };
 
-  const WHATSAPP_NUMBER = "917498881947"; 
+  const WHATSAPP_NUMBER = "919699933358"; 
 // 👆 replace with CLIENT’S official WhatsApp number (country code required)
 
 const handleSubmit = (e: React.FormEvent) => {
@@ -54,17 +54,50 @@ ${formData.message || "No additional notes"}
 
 
   const services = [
-    'General Health Checkup',
-    'Specialist Consultation',
-    'Emergency Care',
-    'Diagnostic Services',
-    'Advanced Facial',
-    'Tan Removal',
-    'Chemical Peel',
-    'Anti-Aging Treatment',
-    'Laser Treatment',
-    'Hair Rejuvenation',
-  ];
+  // ===== GENERAL =====
+  "General Health Checkup",
+  "Specialist Consultation",
+  "Emergency Care",
+  "Diagnostic Services",
+
+  // ===== SKIN =====
+  "Skin – Hydra Facial",
+  "Skin – Medi Facial",
+  "Skin – Vampire Facial",
+  "Skin – Hollywood Facial",
+  "Skin – Glass Glow Facial",
+  "Skin – Acne Treatment",
+  "Skin – Pigmentation Treatment",
+  "Skin – Anti-Aging Treatment",
+  "Skin – Chemical Peel",
+  "Skin – Under-Eye Treatment",
+  "Skin – Lip Pigmentation Treatment",
+  "Skin – Tattoo Removal",
+  "Skin – Skin Tag / Mole Removal",
+
+  // ===== HAIR =====
+  "Hair – Hair Fall Treatment",
+  "Hair – Dandruff Treatment",
+  "Hair – Hair Rejuvenation",
+  "Hair – PRP / GFC Treatment",
+  "Hair – Hair Mesotherapy",
+  "Hair – Hair Transplant",
+
+  // ===== LASER =====
+  "Laser – Upper Lip",
+  "Laser – Chin",
+  "Laser – Full Face",
+  "Laser – Underarms",
+  "Laser – Full Arms",
+  "Laser – Full Legs",
+  "Laser – Full Body",
+
+  // ===== PRE-WEDDING =====
+  "Pre-Wedding – Body Polishing",
+  "Pre-Wedding – BB Glow",
+  "Pre-Wedding – Glow Therapy",
+];
+
 
   const timeSlots = [
     '09:00 AM',
@@ -98,7 +131,7 @@ ${formData.message || "No additional notes"}
             className="text-5xl md:text-6xl font-bold text-gray-800 mb-6"
           >
             Book Your{' '}
-            <span className="bg-gradient-to-r from-[#A7D3F3] to-[#F7C6D3] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
               Appointment
             </span>
           </motion.h1>
@@ -150,7 +183,7 @@ ${formData.message || "No additional notes"}
                     transition={{ delay: 0.2 + index * 0.1 }}
                     className="flex items-start space-x-4"
                   >
-                    <div className="bg-gradient-to-br from-[#A7D3F3] to-[#F7C6D3] p-3 rounded-xl flex-shrink-0">
+                    <div className="bg-gradient-to-br from-[#0095ff] to-[#ff7197] p-3 rounded-xl flex-shrink-0">
                       <item.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -179,7 +212,7 @@ ${formData.message || "No additional notes"}
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
                     <Phone className="w-5 h-5 text-[#A7D3F3]" />
-                    <span className="text-gray-700">+1 (555) 123-4567</span>
+                    <span className="text-gray-700">+91 9699933358</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Mail className="w-5 h-5 text-[#F7C6D3]" />
@@ -329,7 +362,7 @@ ${formData.message || "No additional notes"}
                       type="submit"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full bg-gradient-to-r from-[#A7D3F3] to-[#F7C6D3] text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all"
+                      className="w-full bg-gradient-to-r from-[#0095ff] to-[#ff7197] text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all"
                     >
                       Confirm Appointment
                     </motion.button>

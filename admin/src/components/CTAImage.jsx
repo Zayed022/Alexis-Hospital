@@ -81,9 +81,7 @@ export default function CTAImage() {
     if (!confirm("Delete the active CTA image?")) return;
 
     try {
-      await fetch(`${API}/${activeImage._id}`, {
-        method: "DELETE",
-      });
+      await fetch(`${API}/${activeImage._id}`, { method: "DELETE" });
       setActiveImage(null);
     } catch (err) {
       console.error(err);
@@ -92,35 +90,43 @@ export default function CTAImage() {
 
   /* ================================================== */
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-6">
-        CTA Image Management
-      </h1>
+    <div className="max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-10 space-y-10">
+      {/* HEADER */}
+      <div>
+        <h1 className="text-xl sm:text-2xl font-semibold text-gray-800">
+          CTA Image Management
+        </h1>
+        <p className="text-sm text-gray-500 mt-1">
+          Manage the call-to-action banner shown across the website
+        </p>
+      </div>
 
       {/* ================= ACTIVE CTA ================= */}
-      <div className="bg-white border rounded-xl p-6 shadow-sm mb-8">
-        <h2 className="text-lg font-medium mb-4">Active CTA Image</h2>
+      <div className="bg-white border rounded-2xl p-5 sm:p-6 shadow-sm">
+        <h2 className="text-base sm:text-lg font-medium mb-4">
+          Active CTA Image
+        </h2>
 
         {loading ? (
           <p>Loading...</p>
         ) : activeImage ? (
-          <div className="flex flex-col md:flex-row gap-6 items-start">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
             <img
               src={activeImage.image}
               alt="Active CTA"
-              className="w-full md:w-80 h-40 object-cover rounded border"
+              className="w-full md:w-96 h-48 object-cover rounded-xl border"
             />
 
-            <div className="flex gap-3">
-              <span className="px-3 py-1 bg-green-100 text-green-700 rounded text-sm">
+            <div className="flex flex-col gap-3">
+              <span className="inline-flex w-fit px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
                 Active
               </span>
 
               <button
                 onClick={handleDelete}
-                className="border px-4 py-1 rounded text-red-600"
+                className="border px-5 py-2 rounded-lg text-red-600 hover:bg-red-50"
               >
-                Delete
+                Delete CTA Image
               </button>
             </div>
           </div>
@@ -132,30 +138,36 @@ export default function CTAImage() {
       {/* ================= UPLOAD FORM ================= */}
       <form
         onSubmit={handleUpload}
-        className="bg-white border rounded-xl p-6 shadow-sm"
+        className="bg-white border rounded-2xl p-5 sm:p-6 shadow-sm space-y-4"
       >
-        <h2 className="text-lg font-medium mb-4">
+        <h2 className="text-base sm:text-lg font-medium">
           Upload New CTA Image
         </h2>
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
+        {/* Upload Box */}
+        <label className="block border-2 border-dashed rounded-xl px-4 py-8 text-center text-sm text-gray-500 cursor-pointer hover:border-black hover:text-black">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+          />
+          Click to upload CTA image
+        </label>
 
         {preview && (
           <img
             src={preview}
             alt="Preview"
-            className="mt-4 h-40 w-full md:w-80 object-cover rounded border"
+            className="h-48 w-full md:w-96 object-cover rounded-xl border"
           />
         )}
 
-        <div className="mt-4 flex gap-3">
+        {/* Actions */}
+        <div className="flex flex-col sm:flex-row gap-3 pt-2">
           <button
             disabled={submitting}
-            className="bg-black text-white px-6 py-2 rounded"
+            className="bg-black text-white px-6 py-2 rounded-lg w-full sm:w-auto disabled:opacity-60"
           >
             Upload & Activate
           </button>
@@ -164,7 +176,7 @@ export default function CTAImage() {
             <button
               type="button"
               onClick={resetForm}
-              className="border px-6 py-2 rounded"
+              className="border px-6 py-2 rounded-lg w-full sm:w-auto"
             >
               Cancel
             </button>
