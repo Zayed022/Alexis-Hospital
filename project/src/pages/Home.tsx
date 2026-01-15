@@ -103,59 +103,131 @@ export default function Home() {
       
 
       {/* ================= HERO ================= */}
-      <section className="relative pt-[140px] md:pt-[120px] min-h-[90vh] flex items-center justify-center">
+      <section className="relative pt-20 md:pt-20 lg:pt-16 pb-24 bg-white sm: mt-20">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
+  <div className="relative w-full max-w-7xl mx-auto px-6 text-center">
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center bg-gradient-to-r from-[#0095ff] to-[#ff7197]
-                       mb-6 px-5 py-2 rounded-full shadow-sm"
-          >
-            <span className="text-xs sm:text-sm font-semibold text-white">
-              Excellence in Healthcare & Aesthetics
-            </span>
-          </motion.div>
+    {/* Logo */}
+    <div className="flex justify-center mb-4 md:mb-10">
+      <img
+        src="/logo.png"
+        alt="Alexis Hospital Logo"
+        className="w-36 h-36 md:w-52 md:h-52 object-contain"
+      />
+    </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight"
-          >
-            <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-              Advanced Healthcare
-            </span>
-            <br />
-            <span className="text-[#0b1324]">& Premium Cosmetology</span>
-            <br />
-            <span className="text-[#0b1324]">Under One Roof</span>
-          </motion.h2>
+    {/* Hospital Name */}
+    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-wide">
+      <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+        ALEXIS HOSPITAL
+      </span>
+    </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Trusted multispecialty hospital in Bhiwandi offering expert medical care
-            and Renew+ cosmetology services.
-          </p>
+    <p className="mt-2 md:mt-2 text-base sm:text-lg md:text-xl font-semibold text-gray-700 uppercase tracking-[0.25em]">
+      & Critical Care Centre
+    </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/booking">
-              <button className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] text-white
-                                 px-8 py-4 rounded-full font-semibold shadow-xl">
-                Book Appointment
-              </button>
-            </Link>
-            <Link to="/services">
-              <button className="bg-white text-[#0b1324] px-8 py-4 rounded-full
-                                 font-semibold shadow-md border">
-                View Services
-              </button>
-            </Link>
-          </div>
+    {/* Doctors Container */}
+   {/* Doctors Container */}
+<div className="relative w-full mt-2 md:mt-20">
 
-        </div>
-      </section>
+{/* Mobile Stack */}
+<div className="flex flex-col gap-8 md:hidden">
+
+  {/* Doctor 1 */}
+  <div>
+    <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+      Dr. Ahmed Khan
+    </h3>
+    <p className="mt-1 text-sm text-gray-700 leading-relaxed">
+      (Managing Director)<br />
+      B.U.M.S (Bengaluru)<br />
+      <span className="font-semibold text-gray-900">
+        24 Hours Emergency
+      </span>
+    </p>
+  </div>
+
+  {/* Doctor 2 – Center */}
+  <div>
+    <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+      Dr. Ganesh Ahire
+    </h3>
+    <p className="mt-1 text-sm text-gray-700 leading-relaxed">
+    M.B.B.S., M.D. (Medicine)<br />
+      K.E.M. Hospital (Mumbai)<br />
+      OPD Time: 12 noon to 2 p.m.<br />
+      & 5 p.m. to 7 p.m.<br />
+      <span className="font-semibold text-gray-900">
+        24 Hours Emergency
+      </span>
+    </p>
+  </div>
+
+  {/* Doctor 3 */}
+  <div>
+    <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+      Dr. Saman Ahmed Khan
+    </h3>
+    <p className="mt-1 text-sm text-gray-700 leading-relaxed">
+      Consultant Cosmetologist<br />
+      Aesthetic Medicine Specialist<br />
+    </p>
+  </div>
+
+</div>
+
+{/* Desktop Absolute Layout */}
+<div className="hidden md:block relative h-[320px] lg:h-[360px]">
+
+
+  {/* Left Doctor */}
+  <div className="absolute left-8 lg:left-12 top-0 text-left">
+    <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+      Dr. Ahmed Khan
+    </h3>
+    <p className="text-base text-gray-700 font-medium">
+      (Managing Director)
+    </p>
+  </div>
+
+  {/* Center Doctor */}
+  <div className="absolute left-1/2 -translate-x-1/2 top-0 text-center max-w-sm">
+    <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+      Dr. Ganesh Ahire
+    </h3>
+    <p className="mt-1 text-base text-gray-700 leading-relaxed">
+    M.B.B.S., M.D. (Medicine)<br />
+      K.E.M. Hospital (Mumbai)<br />
+      OPD Time: 12 noon to 2 p.m.<br />
+      & 5 p.m. to 7 p.m.<br />
+      <span className="font-semibold text-gray-900">
+        24 Hours Emergency
+      </span>
+    </p>
+  </div>
+
+  {/* Right Doctor */}
+  <div className="absolute right-8 lg:right-12 top-0 text-left max-w-sm">
+    <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+      Dr. Saman Ahmed Khan
+    </h3>
+    <p className="mt-1 text-base text-gray-700 leading-relaxed">
+      Consultant Cosmetologist<br />
+      Aesthetic Medicine Specialist<br />
+      
+    </p>
+  </div>
+
+</div>
+
+</div>
+
+  </div>
+</section>
+
+
+
 
       <section className="pt-[140px] md:pt-[120px] text-center max-w-6xl mx-auto px-4">
 
