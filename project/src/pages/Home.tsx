@@ -65,19 +65,19 @@ export default function Home() {
 
   const testimonials = [
     {
-      name: 'Sarah Johnson',
+      name: 'Khan Aiman',
       role: 'Cosmetology Patient',
       text: 'The anti-aging treatment results exceeded my expectations. The staff is incredibly professional and caring.',
       rating: 5,
     },
     {
-      name: 'Michael Chen',
+      name: 'Suraj patil',
       role: 'Medical Patient',
       text: 'Exceptional medical care combined with luxurious facilities. Alexis Hospital sets a new standard in healthcare.',
       rating: 5,
     },
     {
-      name: 'Emily Rodriguez',
+      name: 'Shaikh Nazia',
       role: 'Laser Treatment Patient',
       text: 'The laser skin care treatment was painless and effective. I can see visible results after just two sessions.',
       rating: 5,

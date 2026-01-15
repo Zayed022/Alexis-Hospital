@@ -17,7 +17,7 @@ export const doctors: Doctor[] = [
   {
     slug: "dr-ganesh-ahire",
     name: "Dr. Ganesh Ahire",
-    title: "Consultant Physician – Internal Medicine",
+    title: "Consultant Physician – MBBS, MD (Medicine) – KEM Hospital",
     experience: "7+ Years Experience",
     image: "/ganesh.jpg", // ✅ Correct usage
 
@@ -57,7 +57,7 @@ export const doctors: Doctor[] = [
  {
   slug: "dr-khan-ahmed",
   name: "Dr. Khan Ahmed",
-  title: "Consultant Physician, ICU & Critical Care | Aesthetic & Cosmetology Specialist",
+  title: "Sr. intensivist | Aesthetic & Cosmetology Specialist",
   experience: "7+ Years of Clinical, ICU & Aesthetic Practice",
   image: "/ahmed.jpg",
 
@@ -149,7 +149,7 @@ export const doctors: Doctor[] = [
   name: "Dr. Khwaja Moinuddin",
   title: "Consultant Pediatrician & Neonatologist (New Born & Child Specialist)",
   experience: "10+ Years Experience in Pediatrics & Neonatal Care",
-  image: "/moinuddin.jpg",
+  image: "/moin.png",
 
   qualifications: [
     "MBBS",

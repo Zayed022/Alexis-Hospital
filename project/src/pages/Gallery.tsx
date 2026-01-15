@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
 
 const images = [
-  "/gallery1.png",
+  
   "/gallery2.png",
-  "/banner1.jpg",
-  "/banner2.jpg",
-  "/banner3.jpeg",
-  "/banner4.jpeg",
+  "/g1.jpeg",
+  "/g2.jpeg",
+  "/g3.jpeg",
+  "/g4.jpeg",
+  "/g5.jpeg",
+  "/g6.jpeg",
+  
   
 ];
 

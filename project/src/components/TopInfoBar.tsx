@@ -48,7 +48,7 @@ export default function TopInfoBar() {
         {/* MOBILE INFO */}
         <div className="flex md:hidden items-center gap-2 sm:gap-3">
           <a
-            href="tel:+919028111592"
+            href="tel:+919699933358"
             className="flex items-center gap-1 hover:text-[#E6F0FA] transition text-xs sm:text-sm"
           >
             <Phone size={12} />
