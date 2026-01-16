@@ -10,6 +10,7 @@ import {
   Star,
   ChevronRight,
 } from 'lucide-react';
+import { useEffect, useState } from "react";
 import HomeBanner from "../components/HomeBanner"
 import Service from '../components/Service';
 import BeforeAfterCase from '../components/BeforeAfterCase';
@@ -17,7 +18,22 @@ import CtaImage from '../components/CtaImage';
 import Stats from '../components/Stats';
 import VideoTestimonials from '../components/VideoTestimonials';
 
+const backgrounds = [
+  "/hospital-bg1.jpeg",
+  "/hospital-bg2.jpeg",
+  "/hospital-bg3.jpeg",
+];
+
 export default function Home() {
+  const [activeBg, setActiveBg] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveBg((prev) => (prev + 1) % backgrounds.length);
+    }, 6000); // change every 6 seconds
+
+    return () => clearInterval(interval);
+  }, []);
   const services = [
     {
       icon: Stethoscope,
@@ -99,132 +115,143 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white sm: mt-8">
+    <div className="min-h-screen bg-white sm: mt-14">
       
 
       {/* ================= HERO ================= */}
-      <section className="relative pt-20 md:pt-20 lg:pt-16 pb-24 bg-white sm: mt-20">
-
-  <div className="relative w-full max-w-7xl mx-auto px-6 text-center">
-
-    {/* Logo */}
-    <div className="flex justify-center mb-4 md:mb-10">
-      <img
-        src="/logo.png"
-        alt="Alexis Hospital Logo"
-        className="w-36 h-36 md:w-52 md:h-52 object-contain"
-      />
-    </div>
-
-    {/* Hospital Name */}
-    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-wide">
-      <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-        ALEXIS HOSPITAL
-      </span>
-    </h1>
-
-    <p className="mt-2 md:mt-2 text-base sm:text-lg md:text-xl font-semibold text-gray-700 uppercase tracking-[0.25em]">
-      & Critical Care Centre
-    </p>
-
-    {/* Doctors Container */}
-   {/* Doctors Container */}
-<div className="relative w-full mt-2 md:mt-20">
-
-{/* Mobile Stack */}
-<div className="flex flex-col gap-8 md:hidden">
-
-  {/* Doctor 1 */}
-  <div>
-    <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-      Dr. Ahmed Khan
-    </h3>
-    <p className="mt-1 text-sm text-gray-700 leading-relaxed">
-      (Managing Director)<br />
-      B.U.M.S (Bengaluru)<br />
-      <span className="font-semibold text-gray-900">
-        24 Hours Emergency
-      </span>
-    </p>
-  </div>
-
-  {/* Doctor 2 – Center */}
-  <div>
-    <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-      Dr. Ganesh Ahire
-    </h3>
-    <p className="mt-1 text-sm text-gray-700 leading-relaxed">
-    M.B.B.S., M.D. (Medicine)<br />
-      K.E.M. Hospital (Mumbai)<br />
-      OPD Time: 12 noon to 2 p.m.<br />
-      & 5 p.m. to 7 p.m.<br />
-      <span className="font-semibold text-gray-900">
-        24 Hours Emergency
-      </span>
-    </p>
-  </div>
-
-  {/* Doctor 3 */}
-  <div>
-    <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-      Dr. Saman Ahmed Khan
-    </h3>
-    <p className="mt-1 text-sm text-gray-700 leading-relaxed">
-      Consultant Cosmetologist<br />
-      Aesthetic Medicine Specialist<br />
-    </p>
-  </div>
-
-</div>
-
-{/* Desktop Absolute Layout */}
-<div className="hidden md:block relative h-[320px] lg:h-[360px]">
+      <section className="relative pt-32 sm:pt-28 md:pt-24 lg:pt-20 pb-24 bg-white overflow-hidden">
 
 
-  {/* Left Doctor */}
-  <div className="absolute left-8 lg:left-12 top-0 text-left">
-    <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-      Dr. Ahmed Khan
-    </h3>
-    <p className="text-base text-gray-700 font-medium">
-      (Managing Director)
-    </p>
-  </div>
+      {/* ================= Background Slideshow ================= */}
+      <div className="absolute inset-0 z-0">
+        {backgrounds.map((bg, index) => (
+          <div
+            key={bg}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === activeBg ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img
+              src={bg}
+              alt=""
+              className="w-full h-full object-cover"
+            />
 
-  {/* Center Doctor */}
-  <div className="absolute left-1/2 -translate-x-1/2 top-0 text-center max-w-sm">
-    <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-      Dr. Ganesh Ahire
-    </h3>
-    <p className="mt-1 text-base text-gray-700 leading-relaxed">
-    M.B.B.S., M.D. (Medicine)<br />
-      K.E.M. Hospital (Mumbai)<br />
-      OPD Time: 12 noon to 2 p.m.<br />
-      & 5 p.m. to 7 p.m.<br />
-      <span className="font-semibold text-gray-900">
-        24 Hours Emergency
-      </span>
-    </p>
-  </div>
+            {/* White overlay for readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white/60" />
 
-  {/* Right Doctor */}
-  <div className="absolute right-8 lg:right-12 top-0 text-left max-w-sm">
-    <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-      Dr. Saman Ahmed Khan
-    </h3>
-    <p className="mt-1 text-base text-gray-700 leading-relaxed">
-      Consultant Cosmetologist<br />
-      Aesthetic Medicine Specialist<br />
-      
-    </p>
-  </div>
+          </div>
+        ))}
+      </div>
 
-</div>
+      {/* ================= Content ================= */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center">
 
-</div>
+        {/* Logo */}
+        <div className="flex justify-center mb-4 md:mb-10">
+          <img
+            src="/logo.png"
+            alt="Alexis Hospital Logo"
+            className="w-36 h-36 md:w-52 md:h-52 object-contain"
+          />
+        </div>
 
-  </div>
-</section>
+        {/* Hospital Name */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-wide">
+          <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+            ALEXIS HOSPITAL
+          </span>
+        </h1>
+
+        <p className="mt-2 text-base sm:text-lg md:text-xl font-semibold text-gray-700 uppercase tracking-[0.25em]">
+          & Critical Care Centre
+        </p>
+
+        {/* ================= Doctors ================= */}
+        <div className="relative w-full mt-8 md:mt-20">
+
+          {/* Mobile Layout */}
+          <div className="flex flex-col gap-8 md:hidden">
+            <div>
+              <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+                Dr. Ahmed Khan
+              </h3>
+              <p className="mt-1 text-sm text-gray-700 leading-relaxed">
+                (Managing Director)<br />
+                B.U.M.S (Bengaluru)<br />
+                <span className="font-semibold text-gray-900">
+                  24 Hours Emergency
+                </span>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+                Dr. Ganesh Ahire
+              </h3>
+              <p className="mt-1 text-sm text-gray-700 leading-relaxed">
+                M.B.B.S., M.D. (Medicine)<br />
+                K.E.M. Hospital (Mumbai)<br />
+                OPD Time: 12 noon to 2 p.m.<br />
+                & 5 p.m. to 7 p.m.<br />
+                <span className="font-semibold text-gray-900">
+                  24 Hours Emergency
+                </span>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-lg bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+                Dr. Saman Ahmed Khan
+              </h3>
+              <p className="mt-1 text-sm text-gray-700 leading-relaxed">
+                Consultant Cosmetologist<br />
+                Aesthetic Medicine Specialist
+              </p>
+            </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:block relative h-[320px] lg:h-[360px]">
+
+            <div className="absolute left-8 lg:left-12 top-0 text-left">
+              <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+                Dr. Ahmed Khan
+              </h3>
+              <p className="text-base text-gray-700 font-medium">
+                (Managing Director)
+              </p>
+            </div>
+
+            <div className="absolute left-1/2 -translate-x-1/2 top-0 text-center max-w-sm">
+              <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+                Dr. Ganesh Ahire
+              </h3>
+              <p className="mt-1 text-base text-gray-700 leading-relaxed">
+                M.B.B.S., M.D. (Medicine)<br />
+                K.E.M. Hospital (Mumbai)<br />
+                OPD Time: 12 noon to 2 p.m.<br />
+                & 5 p.m. to 7 p.m.<br />
+                <span className="font-semibold text-gray-900">
+                  24 Hours Emergency
+                </span>
+              </p>
+            </div>
+
+            <div className="absolute right-8 lg:right-12 top-0 text-left max-w-sm">
+              <h3 className="font-bold text-xl bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
+                Dr. Saman Ahmed Khan
+              </h3>
+              <p className="mt-1 text-base text-gray-700 leading-relaxed">
+                Consultant Cosmetologist<br />
+                Aesthetic Medicine Specialist
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
 
 
 
