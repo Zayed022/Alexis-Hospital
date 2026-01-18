@@ -41,27 +41,26 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="
-    font-body
-  fixed
-  mt-10
-  md:mt-0
-  top-10
-  left-0
-  right-0
-  z-40
-  bg-white/95
-  backdrop-blur
-  shadow-sm
-  sm:mb-22
-">
-
+    <nav
+      className="
+        font-body
+        fixed
+        mt-10
+        md:mt-0
+        top-10
+        left-0
+        right-0
+        z-40
+        bg-white/95
+        backdrop-blur
+        shadow-sm
+      "
+    >
       <div className="max-w-7xl mx-auto px-4">
         {/* HEADER */}
         <div className="h-20 flex items-center justify-between">
-          {/* LOGOS ONLY */}
+          {/* LOGOS */}
           <div className="flex items-center gap-6">
-            {/* Hospital Logo */}
             <Link to="/">
               <img
                 src={hospitalLogo}
@@ -70,19 +69,13 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* Divider */}
             <div className="h-8 w-px bg-gray-300" />
 
-            {/* Cosmetology Logo */}
             <Link to="/services/cosmetology">
               <img
                 src={cosmoLogo}
                 alt="Alexis Cosmetology"
-                className={`h-10 w-auto object-contain transition ${
-                  isActive("/services/cosmetology")
-                    ? "opacity-100"
-                    : "opacity-100 hover:opacity-100"
-                }`}
+                className="h-10 w-auto object-contain"
               />
             </Link>
           </div>
@@ -163,7 +156,7 @@ export default function Navbar() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "calc(100vh - 120px)", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden overflow-y-auto pb-6"
+              className="md:hidden overflow-y-auto pb-24"
             >
               {navLinks.map((link) =>
                 link.name === "Services" ? (
@@ -203,6 +196,15 @@ export default function Navbar() {
                   </Link>
                 )
               )}
+
+              {/* MOBILE BOOK APPOINTMENT */}
+              <div className="px-4 mt-6">
+                <Link to="/booking" onClick={() => setMobileOpen(false)}>
+                  <button className="w-full bg-gradient-to-r from-[#0095ff] to-[#ff7197] text-white py-3 rounded-full text-sm font-semibold">
+                    Book Appointment
+                  </button>
+                </Link>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

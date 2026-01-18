@@ -111,7 +111,7 @@ export default function TopInfoBar() {
       {/* MOBILE QUICK ACTION BAR */}
       <div className="md:hidden border-t border-white/20 bg-[#0D4E92] px-3 py-1.5 flex justify-around">
         <MobileAction
-          href="tel:+919028111592"
+          href="tel:+919699933358"
           icon={<Phone size={12} />}
         >
           <span className="text-xs">Call Now</span>
