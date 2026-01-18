@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Play, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import teti1 from "../assets/videos/testi1.mp4";
+import teti4 from "../assets/videos/testi4.mp4";
 import teti2 from "../assets/videos/testi2.mp4";
 import teti3 from "../assets/videos/testi3.mp4";
 
@@ -23,7 +23,7 @@ const videos: VideoTestimonial[] = [
     id: "1",
     name: "",
     role: "Cosmetology Patient",
-    videoSrc: teti1,
+    videoSrc: teti4,
     poster: thumb1,
   },
   {
