@@ -7,6 +7,7 @@ export default function Booking() {
     name: '',
     phone: '',
     service: '',
+    doctor: '',
     date: '',
     time: '',
     message: '',
@@ -35,13 +36,15 @@ const handleSubmit = (e: React.FormEvent) => {
 
 👤 Name: ${formData.name}
 📞 Phone: ${formData.phone}
+👨‍⚕️ Doctor: ${formData.doctor}
 🩺 Service: ${formData.service}
 📆 Date: ${formData.date}
 ⏰ Time: ${formData.time}
 
 📝 Notes:
 ${formData.message || "No additional notes"}
-  `;
+`;
+
 
   const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     message
@@ -51,6 +54,13 @@ ${formData.message || "No additional notes"}
 
   setIsSubmitted(true);
 };
+
+const doctors = [
+  "Dr. Ahmed Khan – Managing Director",
+  "Dr. Ganesh Ahire – Physician (MD Medicine)",
+  "Dr. Saman Ahmed Khan – Consultant Cosmetologist",
+];
+
 
 
   const services = [
@@ -277,6 +287,34 @@ ${formData.message || "No additional notes"}
     />
   </div>
 </div>
+
+<div>
+  <label className="block text-sm font-semibold text-gray-700 mb-2">
+    Select Doctor
+  </label>
+
+  <div className="relative">
+    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+
+    <select
+      name="doctor"
+      value={formData.doctor}
+      onChange={handleChange}
+      required
+      className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200
+                 focus:border-[#A7D3F3] focus:ring-2 focus:ring-[#A7D3F3]/20
+                 outline-none transition-all appearance-none"
+    >
+      <option value="">Select a doctor</option>
+      {doctors.map((doctor) => (
+        <option key={doctor} value={doctor}>
+          {doctor}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">

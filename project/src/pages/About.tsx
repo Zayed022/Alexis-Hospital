@@ -268,33 +268,54 @@ export default function About() {
             {doctors.map((doctor) => (
               <Link key={doctor.slug} to={`/doctors/${doctor.slug}`}>
                 <motion.div
-                  variants={fadeInUp}
-                  whileHover={{ y: -5 }}
-                  className="cursor-pointer bg-gradient-to-br from-[#A7D3F3]/10 to-white rounded-lg md:rounded-xl lg:rounded-2xl p-4 md:p-6 shadow-md hover:shadow-xl transition-all"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-[#0095ff] to-[#ff7197] rounded-lg md:rounded-xl flex items-center justify-center mx-auto mb-4 md:mb-6"
-                  >
-                    <img
-                      src={doctor.image}
-                      alt={doctor.name}
-                      className="w-14 h-14 md:w-18 md:h-18 lg:w-20 lg:h-20 object-cover rounded-md md:rounded-lg"
-                    />
-                  </motion.div>
+  variants={fadeInUp}
+  whileHover={{ y: -4 }}
+  className="
+    cursor-pointer
+    bg-gradient-to-br from-[#A7D3F3]/10 to-white
+    rounded-xl lg:rounded-2xl
+    p-5 md:p-6
+    shadow-md hover:shadow-lg
+    transition-all
+    h-[280px] md:h-[300px] lg:h-[320px]
+    flex flex-col items-center text-center
+  "
+>
+  {/* IMAGE */}
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    className="
+      w-16 h-16 md:w-20 md:h-20
+      bg-gradient-to-br from-[#0095ff] to-[#ff7197]
+      rounded-xl
+      flex items-center justify-center
+      mb-4
+      shrink-0
+    "
+  >
+    <img
+      src={doctor.image}
+      alt={doctor.name}
+      className="w-14 h-14 md:w-18 md:h-18 object-cover rounded-lg"
+    />
+  </motion.div>
 
-                  <h3 className="text-base md:text-lg lg:text-xl font-bold text-[#0b1324] mb-1 md:mb-2 text-center">
-                    {doctor.name}
-                  </h3>
+  {/* NAME */}
+  <h3 className="text-base md:text-lg font-bold text-[#0b1324] leading-tight mb-1 line-clamp-2">
+    {doctor.name}
+  </h3>
 
-                  <p className="text-[#0095ff] font-semibold text-center mb-1 md:mb-2 text-sm md:text-base">
-                    {doctor.title}
-                  </p>
+  {/* TITLE */}
+  <p className="text-[#0095ff] font-semibold text-sm md:text-sm leading-snug mb-2 line-clamp-2">
+    {doctor.title}
+  </p>
 
-                  <p className="text-xs md:text-sm text-gray-500 text-center">
-                    {doctor.experience}
-                  </p>
-                </motion.div>
+  {/* EXPERIENCE */}
+  <p className="text-sm text-gray-600 font-medium mt-1">
+    {doctor.experience}
+  </p>
+</motion.div>
+
               </Link>
             ))}
           </div>

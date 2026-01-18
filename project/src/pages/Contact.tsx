@@ -165,11 +165,13 @@ export default function Contact() {
       </Helmet>
     <div className="min-h-screen bg-white pt-16 md:pt-20 font-heading sm: mt-20">
       
+      
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="relative py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#A7D3F3]/20 via-white to-[#F7C6D3]/20"
       >
+        
         <div className="max-w-7xl mx-auto text-center">
         <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-6">
           Contact Alexis Hospital Bhiwandi
@@ -179,27 +181,8 @@ export default function Contact() {
           Reach Alexis Hospital & Critical Care Centre in Bhiwandi for doctor
           appointments, emergency services, and patient inquiries.
         </p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 md:mb-6"
-          >
-
-            Get in{' '}
-            <span className="bg-gradient-to-r from-[#0095ff] to-[#ff7197] bg-clip-text text-transparent">
-              Touch
-            </span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0 font-body"
-          >
-            We're here to answer your questions and provide the care you need.
-            Reach out to us anytime.
-          </motion.p>
+          
+          
         </div>
       </motion.section>
 
