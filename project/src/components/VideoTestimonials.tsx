@@ -3,12 +3,12 @@ import { Play, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import teti4 from "../assets/videos/testi4.mp4";
-import teti2 from "../assets/videos/testi2.mp4";
-import teti3 from "../assets/videos/testi3.mp4";
+import teti5 from "../assets/videos/testi5.mp4";
+import teti6 from "../assets/videos/testi6.mp4";
 
 import thumb1 from "../assets/ahmed.png";
 import thumb2 from "../assets/renew.png";
-import thumb3 from "../assets/wife.png";
+import thumb5 from "../assets/thumb5.jpeg";
 
 interface VideoTestimonial {
   id: string;
@@ -30,15 +30,15 @@ const videos: VideoTestimonial[] = [
     id: "2",
     name: "",
     role: "Medical Patient",
-    videoSrc: teti2,
-    poster:thumb2,
+    videoSrc: teti5,
+    poster:thumb5,
   },
   {
     id: "3",
     name: "",
     role: "Laser Treatment Patient",
-    videoSrc: teti3,
-    poster: thumb3,
+    videoSrc: teti6,
+    poster: thumb5,
   },
 ];
 
