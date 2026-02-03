@@ -59,6 +59,7 @@ const doctors = [
   "Dr. Ahmed Khan – Managing Director",
   "Dr. Ganesh Ahire – Physician (MD Medicine)",
   "Dr. Saman Ahmed Khan – Consultant Cosmetologist",
+  "Dr. Khawaja Moinuddin - Consultant Pediatrician & Neonatologist"
 ];
 
 
